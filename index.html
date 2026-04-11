@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Presentación Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0392b;
+            --dark: #121212;
+            --white: #ffffff;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--dark); height: 100vh; overflow: hidden; }
+
+        /* --- PANTALLA DE INICIO CON TU FONDO PERSONALIZADO --- */
+        #intro-screen {
+            position: fixed; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        /* Capa para la imagen que tú elijas */
+        .fondo-personalizado {
+            position: absolute; inset: 0;
+            background-image: url('fondo.jpg'); /* AQUÍ VA TU IMAGEN */
+            background-size: cover;
+            background-position: center;
+            filter: blur(12px) brightness(0.3); /* Efecto borroso y oscuro */
+            z-index: -1;
+            transform: scale(1.1); /* Evita bordes blancos por el blur */
+        }
+
+        /* Dama de la Justicia que golpea */
+        .justicia-golpe {
+            width: 220px;
+            filter: drop-shadow(0 0 20px rgba(192, 57, 43, 0.5));
+            animation: mazoJusticia 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes mazoJusticia {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.25) rotate(5deg); filter: drop-shadow(0 0 40px white); }
+        }
+
+        .btn-entrar {
+            background: var(--primary); color: white; border: none;
+            padding: 15px 45px; font-size: 1.2rem; font-weight: 800;
+            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 25px rgba(192, 57, 43, 0.4);
+            opacity: 0; animation: fadeIn 1s forwards 1.2s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- INTERFAZ --- */
+        #presentacion { display: none; height: 100vh; grid-template-columns: 300px 1fr; }
+
+        nav {
+            background: #1a1a1a; padding: 30px;
+            display: flex; flex-direction: column;
+            border-right: 3px solid var(--primary);
+        }
+
+        nav h1 { font-size: 0.9rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; }
+
+        .nombre-chino-img {
+            max-width: 140px; margin-bottom: 30px;
+            filter: brightness(1.2) drop-shadow(0 0 5px var(--primary));
+        }
+
+        nav button {
+            background: none; border: none; color: #666;
+            text-align: left; padding: 12px; margin: 3px 0;
+            cursor: pointer; font-weight: 600; border-radius: 8px; transition: 0.3s;
+        }
+
+        nav button.active { background: var(--primary); color: white; transform: translateX(10px); }
+
+        /* --- SLIDES 3D --- */
+        main { position: relative; perspective: 1500px; background: #f0f2f5; display: flex; align-items: center; justify-content: center; }
+
+        .slide {
+            position: absolute; width: 85%; height: 80%;
+            background: var(--white); border-radius: 25px; padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: none;
+        }
+
+        .slide.active { display: block; animation: slide3D 0.7s forwards; }
+
+        @keyframes slide3D { from { opacity: 0; transform: translateZ(-500px); } to { opacity: 1; transform: translateZ(0); } }
+
+        .slide h2 { color: var(--primary); font-size: 2.2rem; border-bottom: 2px solid #eee; margin-bottom: 20px; }
+        .card-reflexion { background: #fff5f5; border-left: 5px solid var(--primary); padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="fondo-personalizado"></div> <img src="justicia.png" class="justicia-golpe">
+        <button class="btn-entrar" onclick="entrar()">ENTRAR A LA LEY</button>
+    </div>
+
+    <div id="presentacion">
+        <nav>
+            <h1>ÍNDICE JURÍDICO</h1>
+            <img src="nombre-chino.png" class="nombre-chino-img">
+            
+            <button class="active" onclick="ir(0)">01. Portada</button>
+            <button onclick="ir(1)">02. ¿Qué es?</button>
+            <button onclick="ir(2)">03. Datos Personales</button>
+            <button onclick="ir(3)">04. Derechos ARCO</button>
+            <button onclick="ir(4)">05. Obligaciones</button>
+            <button onclick="ir(5)">06. Seguridad</button>
+            <button onclick="ir(6)">07. Reflexión Grupal</button>
+        </nav>
+
+        <main>
+            <div class="slide active">
+                <h2>Ley 18.331</h2>
+                <p>Protección de Datos Personales y Habeas Data.</p>
+                <img src="justicia.png" style="position:absolute; bottom:20px; right:20px; width:250px; opacity:0.6;">
+            </div>
+
+            <div class="slide">
+                <h2>02. Definición</h2>
+                <p>Es el escudo legal que protege nuestra privacidad frente al manejo masivo de información digital.</p>
+            </div>
+
+            <div class="slide">
+                <h2>03. Datos Personales</h2>
+                <p><strong>Identificativos:</strong> Nombre, CI, Teléfono.<br><strong>Sensibles:</strong> Salud, religión, orientación sexual (protección extrema).</p>
+            </div>
+
+            <div class="slide">
+                <h2>04. Derechos ARCO</h2>
+                <p>Acceso, Rectificación, Cancelación y Oposición. El poder de controlar qué saben de nosotros.</p>
+            </div>
+
+            <div class="slide">
+                <h2>05. Obligaciones</h2>
+                <p>Ninguna empresa puede usar tus datos sin tu <strong>consentimiento previo y expreso</strong>.</p>
+            </div>
+
+            <div class="slide">
+                <h2>06. Seguridad</h2>
+                <p>La ley exige protocolos de defensa para evitar robos de identidad y hackeos de bases de datos.</p>
+            </div>
+
+            <div class="slide">
+                <h2>07. Reflexión Grupal: Redes Sociales</h2>
+                <div class="card-reflexion">
+                    <p>Como grupo, consideramos que esta ley es el pilar de nuestra libertad en redes sociales como <strong>Instagram o TikTok</strong>:</p>
+                    <ul>
+                        <li><strong>Control de Huella Digital:</strong> Nos permite decidir qué rastro dejamos en internet.</li>
+                        <li><strong>Derecho al Olvido:</strong> Podemos limpiar nuestra reputación borrando datos que ya no deben estar públicos.</li>
+                        <li><strong>Freno al Algoritmo:</strong> Evita que nuestra información privada sea vendida sin control.</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function entrar() {
+            document.getElementById('intro-screen').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('presentacion').style.display = 'grid';
+            }, 800);
+        }
+
+        function ir(idx) {
+            const slides = document.querySelectorAll('.slide');
+            const btns = document.querySelectorAll('nav button');
+            slides.forEach(s => s.classList.remove('active'));
+            btns.forEach(b => b.classList.remove('active'));
+            slides[idx].classList.add('active');
+            btns[idx].classList.add('active');
+        }
+    </script>
+</body>
+  </html>
+  
