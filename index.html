@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Protección de Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1a5c8a;
+            --soft-gray: #f4f7f6;
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--soft-gray);
+            color: var(--text-dark);
+        }
+
+        /* --- ENCABEZADO ESTILO FORMAL --- */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        header p { margin-top: 10px; font-weight: 300; opacity: 0.9; }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- TARJETAS DE CONTENIDO --- */
+        .law-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .law-card:hover { transform: translateY(-5px); }
+
+        .law-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-blue);
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .law-card ul { list-style: none; padding: 0; }
+
+        .law-card li {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .law-card li::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* --- BOTÓN DE INTERACCIÓN --- */
+        .btn-more {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .reflexion {
+            background-color: #e3effa;
+            border-left-color: #2c3e50;
+        }
+
+        footer { text-align: center; padding: 40px; color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Ley 18.331: Protección de Datos Personales</h1>
+    <p>Presentación Digital - Aspectos Principales y Relevancia</p>
+</header>
+
+<div class="main-container">
+    
+    <section class="law-card">
+        <h2>1. ¿Qué es la Ley 18.331?</h2>
+        <ul>
+            <li><strong>Objetivo:</strong> Garantizar el derecho fundamental a la protección de datos personales mediante su control y tratamiento adecuado.</li>
+            <li><strong>Surgimiento:</strong> Nace ante la necesidad de regular el flujo de información en la era digital y proteger la privacidad de los ciudadanos.</li>
+        </ul>
+    </section>
+
+    <section class="law-card">
+        <h2>2. ¿Qué son los datos personales?</h2>
+        <ul>
+            <li><strong>Definición:</strong> Cualquier información que permita identificar a una persona física o jurídica.</li>
+            <li><strong>Ejemplos:</strong> Nombres, cédula de identidad, domicilio, registros médicos o fotos.</li>
+        </ul>
+    </section>
+
+    <section class="law-card">
+        <h2>3. Derechos de las personas</h2>
+        <p>La ley establece derechos clave conocidos como ARCO:</p>
+        <ul>
+            <li><strong>Acceso:</strong> Saber quién tiene tus datos y para qué.</li>
+            <li><strong>Rectificación:</strong> Corregir información errónea o incompleta.</li>
+            <li><strong>Eliminación:</strong> El "derecho al olvido", pidiendo que se borren datos si no es legal tenerlos.</li>
+        </ul>
+    </section>
+
+    <section class="law-card">
+        <h2>4. Seguridad e Impacto Social</h2>
+        <ul>
+            <li><strong>Riesgos:</strong> Protege contra hackeos, suplantación de identidad y filtraciones malintencionadas.</li>
+            <li><strong>Impacto:</strong> Crea un entorno digital más seguro y transparente para el uso de redes sociales y tecnología.</li>
+        </ul>
+    </section>
+
+    <section class="law-card reflexion">
+        <h2>5. Reflexión del Grupo</h2>
+        <ul>
+            <li><strong>Importancia:</strong> Es vital para que las organizaciones manejen nuestra información con responsabilidad y consentimiento.</li>
+            <li><strong>Redes Sociales:</strong> Nos recuerda que cada "clic" genera datos que deben ser protegidos por ley.</li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    Elaborado para la entrega del Domingo 12 de Abril, 2026
+</footer>
+
+</body>
+  </html>
+  
