@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331: Protección de Datos Personales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37; /* Dorado Justicia */
+            --dark: #121212;
+            --white: #ffffff;
+            --gray: #f4f4f9;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--dark); height: 100vh; overflow: hidden; }
+
+        /* --- INTRO --- */
+        #intro-screen {
+            position: fixed; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .fondo-blur {
+            position: absolute; inset: 0;
+            background-image: url('fondo.jpg');
+            background-size: cover; background-position: center;
+            filter: blur(15px) brightness(0.3);
+            z-index: -1; transform: scale(1.1);
+        }
+
+        .justicia-intro {
+            width: 180px;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+            animation: golpe 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes golpe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1) translateY(-5px); filter: drop-shadow(0 0 40px var(--primary)); }
+        }
+
+        .btn-entrar {
+            background: var(--primary); color: #000; border: none;
+            padding: 15px 40px; font-size: 1.1rem; font-weight: 800;
+            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            opacity: 0; animation: fadeIn 1s forwards 1.2s; transition: 0.3s;
+        }
+
+        .btn-entrar:hover { transform: scale(1.05); background: #f1c40f; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- INTERFAZ DE NAVEGACIÓN --- */
+        #presentacion { display: none; height: 100vh; grid-template-columns: 260px 1fr; }
+
+        nav {
+            background: #111; padding: 25px;
+            display: flex; flex-direction: column;
+            border-right: 2px solid var(--primary);
+        }
+
+        nav h1 { font-size: 0.75rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+
+        .nombre-chino-img {
+            max-width: 60px;
+            margin-bottom: 25px;
+            filter: sepia(1) saturate(5) hue-rotate(5deg);
+            opacity: 0.8;
+        }
+
+        nav button {
+            background: none; border: none; color: #555;
+            text-align: left; padding: 10px 15px; margin: 2px 0;
+            cursor: pointer; font-weight: 600; font-size: 0.85rem;
+            transition: 0.3s; border-radius: 6px;
+        }
+
+        nav button.active { background: var(--primary); color: #000; transform: translateX(10px); }
+
+        /* --- SLIDES CON EFECTO 3D --- */
+        main { position: relative; perspective: 1500px; background: var(--gray); display: flex; align-items: center; justify-content: center; }
+
+        .slide {
+            position: absolute; width: 85%; height: 85%;
+            background: var(--white); border-radius: 20px; padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: none;
+            overflow-y: auto;
+        }
+
+        .slide.active { display: block; animation: slide3D 0.6s forwards; }
+
+        @keyframes slide3D { from { opacity: 0; transform: translateZ(-400px); } to { opacity: 1; transform: translateZ(0); } }
+
+        .slide h2 { color: #2c3e50; font-size: 1.8rem; margin-top: 0; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        
+        .section-box { margin-bottom: 25px; }
+        .section-box h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 8px; background: #000; display: inline-block; padding: 2px 10px; border-radius: 4px; }
+        .section-box p { color: #444; line-height: 1.6; font-size: 0.95rem; margin: 0; }
+        
+        strong { color: #000; font-weight: 800; }
+
+        .reflexion-humana {
+            font-size: 1rem; line-height: 1.7; color: #333;
+            text-align: left; padding: 25px; background: #fffdf5;
+            border-radius: 15px; border-left: 8px solid var(--primary);
+        }
+
+        ul { padding-left: 20px; color: #444; font-size: 0.95rem; }
+        li { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="fondo-blur"></div>
+        <img src="justicia.png" class="justicia-intro">
+        <button class="btn-entrar" onclick="entrar()">ENTRAR A LA LEY</button>
+    </div>
+
+    <div id="presentacion">
+        <nav>
+            <h1>ÍNDICE JURÍDICO</h1>
+            <img src="nombre-chino.png" class="nombre-chino-img">
+            
+            <button class="active" onclick="ir(0)">01. Portada</button>
+            <button onclick="ir(1)">04. Obligaciones</button>
+            <button onclick="ir(2)">05. Seguridad</button>
+            <button onclick="ir(3)">06. Impacto en Sociedad</button>
+            <button onclick="ir(4)">07. Reflexión Grupal</button>
+        </nav>
+
+        <main>
+            <div class="slide active" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h1 style="font-size: 3.5rem; margin: 0; color: #000;">LEY 18.331</h1>
+                <p style="font-size: 1.4rem; color: var(--primary); font-weight: 600;">Habeas Data: Privacidad y Control</p>
+                <div style="width: 100px; height: 5px; background: var(--primary); margin: 20px 0;"></div>
+                <p>Uruguay - 12 de Abril, 2026</p>
+            </div>
+
+            <div class="slide">
+                <h2>04. Obligaciones de las organizaciones</h2>
+                <div class="section-box">
+                    <h3>Cómo deben manejar los datos</h3>
+                    <p>Toda organización, pública o privada, debe actuar bajo tres principios inquebrantables:</p>
+                    <ul>
+                        <li><strong>Trato Legal y Transparente:</strong> Deben informar claramente para qué se recolectan los datos y no usarlos para fines distintos sin autorización.</li>
+                        <li><strong>Calidad del Dato:</strong> Los datos deben ser exactos, veraces y mantenerse actualizados.</li>
+                        <li><strong>Criterio de Necesidad:</strong> Solo se deben pedir y almacenar los datos estrictamente necesarios para el fin declarado.</li>
+                    </ul>
+                </div>
+                <div class="section-box">
+                    <h3>Importancia del consentimiento</h3>
+                    <p>Es la base de todo el sistema. El consentimiento debe ser previo, expreso, libre e informado. Sin él, el tratamiento de datos es ilegal. Esto empodera al ciudadano frente a las corporaciones y garantiza su control sobre su información personal.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>05. Importancia de la seguridad de los datos</h2>
+                <div class="section-box">
+                    <h3>Riesgos: Hackeos y Robo</h3>
+                    <p>Las organizaciones son responsables de proteger sus servidores y bases de datos contra amenazas:</p>
+                    <ul>
+                        <li><strong>Hackeos Masivos:</strong> Robo completo de datos de clientes (mails, contraseñas, tarjetas).</li>
+                        <li><strong>Robo de Identidad:</strong> Suplantación para cometer estafas, sacar préstamos o delinquir a nombre de la víctima.</li>
+                        <li><strong>Suplantación de Identidad y Ciberdelitos.</strong></li>
+                    </ul>
+                </div>
+                <div class="section-box">
+                    <h3>Medidas básicas de protección</h3>
+                    <p>La ley exige la implementación de protocolos técnicos y organizativos:</p>
+                    <ul>
+                        <li><strong>Cifrado (Encriptación):</strong> Que la información sea ilegible sin la clave.</li>
+                        <li><strong>Firewalls y Seguridad Perimetral:</strong> Para evitar accesos externos.</li>
+                        <li><strong>Auditorías y Reporte:</strong> Deben mantener registros de acceso y avisar inmediatamente si sufren un ciberataque masivo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>06. Impacto en la sociedad</h2>
+                <div class="section-box">
+                    <h3>¿Cómo protege a los ciudadanos?</h3>
+                    <p>Actúa como un escudo social contra la manipulación, el acoso y la discriminación. Al garantizar el Habeas Data, la ley nos protege de ser clasificados ilegalmente por algoritmos o de que nuestra información íntima se convierta en mercancía.</p>
+                </div>
+                <div class="section-box">
+                    <h3>Ejemplos reales o situaciones cotidianas</h3>
+                    <ul>
+                        <li><strong>Spam Comercial:</strong> Prohíbe que una empresa te contacte si no le diste tu consentimiento previo.</li>
+                        <li><strong>Ficha Médica:</strong> Evita que un centro médico comparta tu historial de salud con aseguradoras para discriminarte.</li>
+                        <li><strong>Identidad Digital:</strong> Asegura que si subiste una foto a Instagram, tienes derecho a exigir que la borren de sus servidores si te vas de la plataforma.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>07. Reflexión Grupal</h2>
+                <div class="reflexion-humana">
+                    Chicos, esta ley es fundamental porque hoy en día nuestra identidad digital es tan importante como la física. Es lo que evita que seamos <strong>productos</strong> en internet. Cada vez que descargan una app o suben un video a TikTok, están regalando pedazos de su vida. 
+                    <br><br>
+                    Nosotros pensamos que es fundamental porque nos da el <strong>derecho a empezar de cero</strong> (derecho al olvido) y nos protege de que una mala decisión digital hoy, nos arruine un trabajo o una oportunidad mañana. En resumen: cuiden sus datos como cuidan su plata, porque en el futuro, la información va a valer mucho más.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function entrar() {
+            document.getElementById('intro-screen').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('presentacion').style.display = 'grid';
+            }, 800);
+        }
+
+        function ir(idx) {
+            const slides = document.querySelectorAll('.slide');
+            const btns = document.querySelectorAll('nav button');
+            slides.forEach(s => s.classList.remove('active'));
+            btns.forEach(b => b.classList.remove('active'));
+            slides[idx].classList.add('active');
+            btns[idx].classList.add('active');
+        }
+    </script>
+</body>
+          </html>
+  
