@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Presentación Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0392b; /* Rojo elegante tipo PowerPoint */
+            --dark: #2c3e50;
+            --bg: #f5f6fa;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- MENÚ LATERAL (MODERNO) --- */
+        nav {
+            width: 280px;
+            background: var(--dark);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        }
+
+        nav h1 { font-size: 1.2rem; margin-bottom: 30px; color: var(--primary); text-transform: uppercase; }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 80vh;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            border-left: 8px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .info-box {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .info-box:hover { border-color: var(--primary); transform: scale(1.02); }
+
+        .info-box h3 { color: var(--primary); margin-top: 0; }
+
+        /* Estilo de la Dama de la Justicia o Iconos */
+        .decor {
+            text-align: center;
+            font-size: 5rem;
+            opacity: 0.1;
+            position: absolute;
+            right: 50px;
+            bottom: 50px;
+            pointer-events: none;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            nav { width: 100%; height: auto; position: sticky; top: 0; z-index: 100; }
+            .content-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>Ley 18.331</h1>
+        <a href="#inicio" class="active">01. Inicio</a>
+        <a href="#definicion">02. ¿Qué es la Ley?</a>
+        <a href="#datos">03. Datos Personales</a>
+        <a href="#derechos">04. Derechos ARCO</a>
+        <a href="#obligaciones">05. Obligaciones</a>
+        <a href="#seguridad">06. Seguridad</a>
+        <a href="#reflexion">07. Reflexión</a>
+    </nav>
+
+    <main>
+        <section id="inicio" class="slide">
+            <h2 style="border:none; text-align:center;">Protección de Datos Personales y Acción de "Habeas Data"</h2>
+            <p style="text-align:center; font-size:1.2rem; color:#666;">Aspectos fundamentales de la Ley 18.331</p>
+            <div style="text-align:center; margin-top:20px;">
+                <span style="background:var(--primary); color:white; padding:10px 20px; border-radius:30px;">Presentación Digital</span>
+            </div>
+        </section>
+
+        <section id="definicion" class="slide">
+            <h2>02. ¿Qué es la Ley?</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Objetivo</h3>
+                    <p>Regular el tratamiento de datos para garantizar el derecho a la privacidad de las personas.</p>
+                </div>
+                <div class="info-box">
+                    <h3>¿Por qué surge?</h3>
+                    <p>Debido al avance tecnológico y la necesidad de controlar cómo las empresas usan nuestra información.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="datos" class="slide">
+            <h2>03. ¿Qué son los Datos Personales?</h2>
+            <div class="info-box" style="margin-bottom:20px;">
+                <p>Es toda información que permite identificar a una persona (Nombre, CI, Huellas, Domicilio).</p>
+            </div>
+            <div class="content-grid">
+                <div class="info-box"><h3>Ejemplos comunes</h3><p>Cédula, Teléfono, Correo.</p></div>
+                <div class="info-box"><h3>Datos Sensibles</h3><p>Salud, ideología, religión.</p></div>
+            </div>
+        </section>
+
+        <section id="derechos" class="slide">
+            <h2>04. Derechos de las Personas</h2>
+            <div class="content-grid">
+                <div class="info-box"><h3>Acceso</h3><p>Saber qué datos tienen de ti.</p></div>
+                <div class="info-box"><h3>Rectificación</h3><p>Corregir datos erróneos.</p></div>
+                <div class="info-box"><h3>Eliminación</h3><p>Derecho al olvido.</p></div>
+                <div class="info-box"><h3>Oposición</h3><p>Negarse al uso de datos.</p></div>
+            </div>
+        </section>
+
+        <section id="obligaciones" class="slide">
+            <h2>05. Obligaciones de Organizaciones</h2>
+            <div class="info-box">
+                <p>Las empresas deben pedir <strong>consentimiento previo e informado</strong> y asegurar que los datos no se usen para fines distintos a los pactados.</p>
+            </div>
+        </section>
+
+        <section id="seguridad" class="slide">
+            <h2>06. Seguridad de los Datos</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Riesgos</h3>
+                    <p>Hackeos, robo de identidad y filtraciones masivas.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Protección</h3>
+                    <p>Uso de contraseñas, encriptación y bases de datos seguras.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reflexion" class="slide">
+            <h2>07. Reflexión Final</h2>
+            <div class="info-box" style="border-left:5px solid var(--primary);">
+                <p>La Ley 18.331 no es solo un papel, es nuestro escudo en internet. En un mundo lleno de redes sociales, el dueño de tu información eres TÚ.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Efecto de cambio de color en el menú al hacer scroll
+        const sections = document.querySelectorAll('.slide');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+  </html>
+  
