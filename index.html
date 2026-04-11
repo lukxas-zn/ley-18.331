@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Experiencia 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0392b;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: var(--white);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- PANTALLA DE INICIO (MAZO 3D) --- */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #2c3e50 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .gavel-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: golpe 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+            filter: drop-shadow(0 0 20px rgba(192, 57, 43, 0.5));
+        }
+
+        @keyframes golpe {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(0deg) scale(1.2); }
+            60% { transform: rotate(10deg) scale(1.1); box-shadow: 0 20px 50px rgba(255,255,255,0.2); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .btn-ver {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--primary);
+            transition: 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- INTERFAZ PRINCIPAL --- */
+        #app-interface {
+            display: none; /* Se activa al dar click */
+            height: 100vh;
+            grid-template-columns: 280px 1fr;
+        }
+
+        nav {
+            background: var(--dark);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav h1 { font-size: 1rem; color: var(--primary); margin-bottom: 40px; letter-spacing: 2px; }
+
+        nav button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            text-align: left;
+            padding: 12px;
+            margin: 4px 0;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.3s;
+            border-radius: 8px;
+        }
+
+        nav button.active { background: var(--primary); color: white; transform: translateX(10px); }
+
+        /* --- CONTENEDOR DE SLIDES 3D --- */
+        main {
+            position: relative;
+            perspective: 1500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+        }
+
+        .slide {
+            position: absolute;
+            width: 80%;
+            height: 70%;
+            background: var(--white);
+            color: #333;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            display: none;
+            transform-style: preserve-3d;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn3D 0.7s forwards;
+        }
+
+        @keyframes slideIn3D {
+            0% { opacity: 0; transform: translateZ(-500px) rotateY(20deg); }
+            100% { opacity: 1; transform: translateZ(0) rotateY(0); }
+        }
+
+        .slide h2 { color: var(--primary); font-size: 2rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .card { background: #f9f9f9; padding: 20px; border-radius: 12px; border-top: 4px solid var(--primary); }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="gavel-icon">⚖️</div>
+        <h1 style="margin-bottom: 30px; letter-spacing: 3px;">LEY 18.331</h1>
+        <button class="btn-ver" onclick="iniciarApp()">VER PRESENTACIÓN</button>
+    </div>
+
+    <div id="app-interface">
+        <nav id="menu">
+            <h1>ÍNDICE JURÍDICO</h1>
+            <button class="active" onclick="showSlide(0)">01. Inicio</button>
+            <button onclick="showSlide(1)">02. ¿Qué es?</button>
+            <button onclick="showSlide(2)">03. Datos Personales</button>
+            <button onclick="showSlide(3)">04. Derechos ARCO</button>
+            <button onclick="showSlide(4)">05. Obligaciones</button>
+            <button onclick="showSlide(5)">06. Seguridad</button>
+            <button onclick="showSlide(6)">07. Reflexión</button>
+        </nav>
+
+        <main>
+            <div class="slide active">
+                <h2>Bienvenido</h2>
+                <p style="font-size: 1.2rem; line-height: 1.6;">Esta presentación digital analiza la <strong>Ley de Protección de Datos Personales y Acción de Habeas Data</strong> en Uruguay.</p>
+                <div class="card">
+                    <p>⚠️ Importante: El uso de tecnología requiere responsabilidad legal.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>¿Qué es la Ley 18.331?</h2>
+                <div class="grid">
+                    <div class="card"><h3>Objetivo</h3><p>Garantizar el derecho al control de tu información personal.</p></div>
+                    <div class="card"><h3>Origen</h3><p>Nace por la necesidad de regular el tratamiento automatizado de datos.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>Datos Personales</h2>
+                <p>Cualquier dato que te identifique es un "Dato Personal".</p>
+                <div class="grid">
+                    <div class="card"><h3>Privados</h3><p>Nombre, CI, Domicilio.</p></div>
+                    <div class="card"><h3>Sensibles</h3><p>Salud, política, religión (más protegidos).</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>Derechos de las Personas</h2>
+                <div class="grid">
+                    <div class="card"><h3>Acceso</h3><p>Saber quién tiene tus datos.</p></div>
+                    <div class="card"><h3>Eliminación</h3><p>Derecho al olvido digital.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>Obligaciones</h2>
+                <div class="card">
+                    <p>Toda organización debe informar para qué usará tus datos y obtener tu <strong>consentimiento explícito</strong>.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>Seguridad</h2>
+                <div class="grid">
+                    <div class="card"><h3>Amenazas</h3><p>Hackeos y robo de identidad.</p></div>
+                    <div class="card"><h3>Defensa</h3><p>Cifrado y protocolos de protección.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>Reflexión Final</h2>
+                <div class="card" style="background: var(--primary); color: white;">
+                    <p style="font-style: italic;">"La privacidad no es algo que tengo, es algo que soy. Protege tus datos como proteges tu vida."</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function iniciarApp() {
+            document.getElementById('intro-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('app-interface').style.display = 'grid';
+            }, 800);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const buttons = document.querySelectorAll('nav button');
+            
+            slides.forEach(s => s.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            buttons[index].classList.add('active');
+        }
+    </script>
+</body>
+</html>
