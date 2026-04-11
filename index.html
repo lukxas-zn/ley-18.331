@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Presentación Grupal Completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0392b;
+            --dark: #121212;
+            --white: #ffffff;
+            --gray: #f4f4f9;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--dark); height: 100vh; overflow: hidden; }
+
+        /* --- INTRO CON FONDO Y JUSTICIA --- */
+        #intro-screen {
+            position: fixed; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .fondo-blur {
+            position: absolute; inset: 0;
+            background-image: url('fondo.jpg');
+            background-size: cover; background-position: center;
+            filter: blur(12px) brightness(0.3);
+            z-index: -1; transform: scale(1.1);
+        }
+
+        .justicia-intro {
+            width: 180px;
+            filter: drop-shadow(0 0 20px rgba(192, 57, 43, 0.6));
+            animation: golpe 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes golpe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15) translateY(-10px); filter: drop-shadow(0 0 40px white); }
+        }
+
+        .btn-entrar {
+            background: var(--primary); color: white; border: none;
+            padding: 15px 40px; font-size: 1.1rem; font-weight: 800;
+            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            opacity: 0; animation: fadeIn 1s forwards 1.2s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- INTERFAZ --- */
+        #presentacion { display: none; height: 100vh; grid-template-columns: 280px 1fr; }
+
+        nav {
+            background: #1a1a1a; padding: 25px;
+            display: flex; flex-direction: column;
+            border-right: 3px solid var(--primary);
+        }
+
+        nav h1 { font-size: 0.85rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+
+        /* NOMBRE CHINO PEQUEÑO */
+        .nombre-chino-img {
+            max-width: 100px; /* Tamaño reducido */
+            margin-bottom: 25px;
+            filter: brightness(1.1);
+            opacity: 0.9;
+        }
+
+        nav button {
+            background: none; border: none; color: #777;
+            text-align: left; padding: 10px 15px; margin: 2px 0;
+            cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            transition: 0.3s; border-radius: 6px;
+        }
+
+        nav button.active { background: var(--primary); color: white; transform: translateX(10px); }
+
+        /* --- SLIDES --- */
+        main { position: relative; perspective: 1500px; background: var(--gray); display: flex; align-items: center; justify-content: center; }
+
+        .slide {
+            position: absolute; width: 85%; height: 85%;
+            background: var(--white); border-radius: 20px; padding: 45px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: none;
+            overflow-y: auto;
+        }
+
+        .slide.active { display: block; animation: slide3D 0.6s forwards; }
+
+        @keyframes slide3D { from { opacity: 0; transform: translateZ(-400px); } to { opacity: 1; transform: translateZ(0); } }
+
+        .slide h2 { color: var(--primary); font-size: 2rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .section-box { margin-bottom: 20px; }
+        .section-box h3 { color: #333; font-size: 1.1rem; margin-bottom: 8px; }
+        .section-box p { color: #555; line-height: 1.5; font-size: 0.95rem; margin: 0; }
+        
+        strong { color: var(--primary); }
+
+        .reflexion-texto {
+            font-size: 1.05rem; line-height: 1.8; color: #444;
+            text-align: justify; padding: 20px; background: #fffafa;
+            border-radius: 15px; border: 1px dashed var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="fondo-blur"></div>
+        <img src="justicia.png" class="justicia-intro">
+        <button class="btn-entrar" onclick="entrar()">VER TRABAJO</button>
+    </div>
+
+    <div id="presentacion">
+        <nav>
+            <h1>ÍNDICE JURÍDICO</h1>
+            <img src="nombre-chino.png" class="nombre-chino-img">
+            
+            <button class="active" onclick="ir(0)">01. Portada</button>
+            <button onclick="ir(1)">02. ¿Qué es?</button>
+            <button onclick="ir(2)">03. Datos Personales</button>
+            <button onclick="ir(3)">04. Derechos ARCO</button>
+            <button onclick="ir(4)">05. Obligaciones</button>
+            <button onclick="ir(5)">06. Seguridad</button>
+            <button onclick="ir(6)">07. Reflexión Final</button>
+        </nav>
+
+        <main>
+            <div class="slide active">
+                <h2>Ley 18.331</h2>
+                <p>Protección de Datos Personales y Acción de Habeas Data en Uruguay.</p>
+                <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <p><strong>Integrantes:</strong> Lucas y grupo.</p>
+                    <p><strong>Asignatura:</strong> Derecho / Informática.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>02. Definición Detallada</h2>
+                <div class="section-box">
+                    <h3>¿Qué es esta ley?</h3>
+                    <p>Es el marco legal que reconoce que el derecho a la protección de datos es un derecho humano. Su función principal es asegurar que cualquier tratamiento de datos (recolección, almacenamiento o uso) se haga respetando la dignidad humana.</p>
+                </div>
+                <div class="section-box">
+                    <h3>¿Para qué sirve?</h3>
+                    <p>Sirve para que las personas no pierdan el control de su vida privada en un mundo digital. Evita que la información sea usada para fines para los cuales no diste permiso.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>03. Tipos de Datos</h2>
+                <div class="section-box">
+                    <h3>Datos Generales</h3>
+                    <p>Información que identifica a una persona: nombre, cédula, dirección, teléfono o correo electrónico.</p>
+                </div>
+                <div class="section-box">
+                    <h3>Datos Sensibles</h3>
+                    <p>Aquellos que revelan origen racial, opiniones políticas, convicciones religiosas, salud o vida sexual. <strong>Estos datos no pueden ser tratados sin una razón legal muy fuerte</strong>.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>04. Derechos ARCO</h2>
+                <div class="section-box">
+                    <h3>¿Para qué sirven estos derechos?</h3>
+                    <p>Son las herramientas que tiene el ciudadano para defenderse:</p>
+                    <ul>
+                        <li><strong>Acceso:</strong> Para saber qué sabe una empresa de ti.</li>
+                        <li><strong>Rectificación:</strong> Para corregir errores que te puedan perjudicar.</li>
+                        <li><strong>Cancelación:</strong> Para que borren tus datos si ya no quieres estar en sus listas.</li>
+                        <li><strong>Oposición:</strong> Para prohibir que usen tus datos con fines de publicidad o marketing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>05. Obligaciones Legales</h2>
+                <div class="section-box">
+                    <h3>El Consentimiento</h3>
+                    <p>Es la base de todo. Para que alguien use tus datos, debes haber aceptado de forma libre, clara y específica. <strong>Si no hay consentimiento, el uso de datos es ilegal</strong>.</p>
+                </div>
+                <div class="section-box">
+                    <h3>Principio de Finalidad</h3>
+                    <p>Los datos solo pueden usarse para lo que se pidió originalmente. Si diste tu mail para una factura, no pueden usarlo para enviarte ofertas sin consultarte.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>06. Seguridad de la Información</h2>
+                <div class="section-box">
+                    <h3>Responsabilidad</h3>
+                    <p>Las empresas son "Responsables de Tratamiento". Deben aplicar cifrado, contraseñas y auditorías. Si los datos se filtran por un hackeo, la empresa debe responder ante la ley por negligencia.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>07. Reflexión Grupal</h2>
+                <div class="reflexion-texto">
+                    Como grupo, llegamos a la conclusión de que la Ley 18.331 es una herramienta fundamental en nuestra vida cotidiana, especialmente por el uso constante de las <strong>redes sociales</strong>. Creemos que es vital porque hoy en día nuestra identidad digital es tan importante como la física. Sin esta ley, estaríamos expuestos a que plataformas como TikTok o Instagram utilicen nuestra información privada, fotos y preferencias sin ningún tipo de límite, lo que podría derivar en ciberacoso o manipulación. Consideramos que conocer estos derechos nos permite navegar con más seguridad y exigir que se respete nuestra privacidad, entendiendo que nosotros somos los únicos dueños de nuestra información.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function entrar() {
+            document.getElementById('intro-screen').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('presentacion').style.display = 'grid';
+            }, 800);
+        }
+
+        function ir(idx) {
+            const slides = document.querySelectorAll('.slide');
+            const btns = document.querySelectorAll('nav button');
+            slides.forEach(s => s.classList.remove('active'));
+            btns.forEach(b => b.classList.remove('active'));
+            slides[idx].classList.add('active');
+            btns[idx].classList.add('active');
+        }
+    </script>
+</body>
+  </html>
+  
