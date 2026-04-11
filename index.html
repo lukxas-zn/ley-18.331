@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Presentación Profesional 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0392b; /* Rojo legal elegante */
+            --dark: #121212;
+            --bg-canvas: #f0f2f5;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            height: 100vh; overflow: hidden;
+        }
+
+        /* --- PANTALLA DE INICIO (MAZO 3D) --- */
+        #intro-screen {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle, #2c3e50 0%, #000 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: all 0.8s ease;
+        }
+
+        .gavel-container {
+            font-size: 120px; margin-bottom: 20px;
+            animation: golpeMazo 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+            filter: drop-shadow(0 0 30px rgba(192, 57, 43, 0.6));
+        }
+
+        @keyframes golpeMazo {
+            0% { transform: rotate(-45deg) scale(1); }
+            45% { transform: rotate(0deg) scale(1.3); }
+            50% { transform: rotate(5deg) scale(1.2); filter: drop-shadow(0 0 50px white); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .btn-entrar {
+            background: var(--primary); color: white; border: none;
+            padding: 18px 50px; font-size: 1.3rem; font-weight: 800;
+            border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(192, 57, 43, 0.4);
+            transition: 0.3s; opacity: 0;
+            animation: aparecerBtn 1s forwards 1.2s;
+        }
+
+        @keyframes aparecerBtn { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* --- INTERFAZ DE NAVEGACIÓN 3D --- */
+        #presentacion {
+            display: none; height: 100vh;
+            grid-template-columns: 300px 1fr;
+            background: var(--bg-canvas);
+        }
+
+        nav {
+            background: #1e1e1e; padding: 40px 25px;
+            display: flex; flex-direction: column;
+            border-right: 2px solid var(--primary);
+        }
+
+        nav h1 { font-size: 1.1rem; color: var(--primary); margin-bottom: 40px; letter-spacing: 2px; }
+
+        nav button {
+            background: none; border: none; color: #888;
+            text-align: left; padding: 15px; margin: 5px 0;
+            cursor: pointer; font-family: inherit; font-weight: 600;
+            transition: 0.4s; border-radius: 12px;
+        }
+
+        nav button.active { 
+            background: var(--primary); color: white; 
+            transform: translateX(15px); box-shadow: -10px 0 20px rgba(192, 57, 43, 0.3);
+        }
+
+        /* --- SLIDES CON EFECTO PROFUNDIDAD --- */
+        main {
+            position: relative; perspective: 2000px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .slide {
+            position: absolute; width: 85%; height: 75%;
+            background: var(--white); color: #222;
+            border-radius: 30px; padding: 60px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            display: none; transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide.active {
+            display: block; animation: entrar3D 0.8s forwards;
+        }
+
+        @keyframes entrar3D {
+            0% { opacity: 0; transform: translateZ(-800px) rotateX(15deg); }
+            100% { opacity: 1; transform: translateZ(0) rotateX(0); }
+        }
+
+        .slide h2 { color: var(--primary); font-size: 2.8rem; margin: 0 0 30px 0; border-left: 10px solid var(--primary); padding-left: 20px; }
+        .grid-moderna { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .card-item { background: #f8f9fa; padding: 25px; border-radius: 20px; border: 1px solid #eee; transition: 0.3s; }
+        .card-item:hover { border-color: var(--primary); transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="gavel-container">⚖️</div>
+        <h1 style="color: white; letter-spacing: 5px; margin-bottom: 40px;">LEY 18.331</h1>
+        <button class="btn-entrar" onclick="activarPresentacion()">ENTRAR A LA LEY</button>
+    </div>
+
+    <div id="presentacion">
+        <nav>
+            <h1>MENÚ JURÍDICO</h1>
+            <button class="active" onclick="irASlide(0)">01. Portada</button>
+            <button onclick="irASlide(1)">02. Definición</button>
+            <button onclick="irASlide(2)">03. Datos Personales</button>
+            <button onclick="irASlide(3)">04. Derechos ARCO</button>
+            <button onclick="irASlide(4)">05. Obligaciones</button>
+            <button onclick="irASlide(5)">06. Seguridad</button>
+            <button onclick="irASlide(6)">07. Reflexión</button>
+        </nav>
+
+        <main>
+            <div class="slide active">
+                <h2>Protección de Datos</h2>
+                <p style="font-size: 1.4rem; color: #555;">Análisis integral de la Ley 18.331 y el derecho al Habeas Data.</p>
+                <div class="card-item" style="margin-top: 40px; background: var(--dark); color: white;">
+                    <p>⚖️ "El control de tu información es un derecho fundamental".</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>02. ¿Qué es esta Ley?</h2>
+                <div class="grid-moderna">
+                    <div class="card-item"><h3>Propósito</h3><p>Garantizar que tus datos sean tratados con respeto y seguridad.</p></div>
+                    <div class="card-item"><h3>Contexto</h3><p>Surge para frenar el abuso de información en plataformas digitales.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>03. Datos Personales</h2>
+                <div class="grid-moderna">
+                    <div class="card-item"><h3>Identificativos</h3><p>Cédula, nombre, dirección y huellas.</p></div>
+                    <div class="card-item"><h3>Sensibles</h3><p>Datos de salud, política o religión (Especial protección).</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>04. Derechos ARCO</h2>
+                <div class="grid-moderna">
+                    <div class="card-item"><h3>Acceso y Rectificación</h3><p>Saber qué tienen de ti y corregir errores.</p></div>
+                    <div class="card-item"><h3>Cancelación y Oposición</h3><p>Borrar tus datos o prohibir su uso específico.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>05. Obligaciones</h2>
+                <div class="card-item" style="border-left: 10px solid gold;">
+                    <p style="font-size: 1.3rem;">Las empresas <strong>deben</strong> obtener tu consentimiento libre e informado antes de usar cualquier dato tuyo.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>06. Seguridad Digital</h2>
+                <div class="grid-moderna">
+                    <div class="card-item"><h3>Riesgos</h3><p>Filtraciones, hackeos y suplantación de identidad.</p></div>
+                    <div class="card-item"><h3>Medidas</h3><p>Encriptación, bases de datos cerradas y firewall legal.</p></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2>07. Reflexión Final</h2>
+                <div class="card-item" style="background: var(--primary); color: white; padding: 40px;">
+                    <p style="font-size: 1.5rem; font-style: italic; text-align: center;">"En la era de la información, la privacidad es nuestra última frontera de libertad."</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function activarPresentacion() {
+            const intro = document.getElementById('intro-screen');
+            intro.style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                intro.style.display = 'none';
+                document.getElementById('presentacion').style.display = 'grid';
+            }, 800);
+        }
+
+        function irASlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const btns = document.querySelectorAll('nav button');
+
+            slides.forEach(s => s.classList.remove('active'));
+            btns.forEach(b => b.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            btns[index].classList.add('active');
+        }
+    </script>
+</body>
+  </html>
+                      
