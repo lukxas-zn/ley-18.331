@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Profesional</title>
+    <title>Ley 18.331 - Presentación Técnica</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --marrón: #6e4c39; /* El color de tu Canva */
+            --marrón: #6e4c39;
             --oro: #d4af37;
             --crema: #fdfaf5;
             --oscuro: #2c1e16;
@@ -32,8 +32,194 @@
             background-color: var(--oscuro);
             color: var(--blanco);
             padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
+            border-right: 2px solid var(--marrón);
+        }
+
+        .menu-header h1 {
+            font-size: 0.9rem; color: var(--oro);
+            text-transform: uppercase; letter-spacing: 2px;
+            text-align: center; margin-bottom: 40px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 8px; }
+
+        nav a {
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 10px 15px; border-radius: 8px;
+            font-size: 0.85rem; cursor: pointer; transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.05); color: var(--blanco); }
+        nav a.active { background: var(--marrón); color: var(--blanco); font-weight: 600; }
+
+        /* --- ÁREA DE DIAPOSITIVAS --- */
+        main {
+            background-color: #e8e3dc; padding: 40px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .slide {
+            position: absolute; width: 85%; height: 85%;
+            background: var(--crema); border-radius: 20px;
+            padding: 40px 60px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; justify-content: center;
+        }
+
+        .slide.active { display: flex; animation: fadeUp 0.5s forwards; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 2rem; border-bottom: 3px solid var(--oro); padding-bottom: 10px; margin-bottom: 15px; }
+        p { color: #444; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+
+        /* --- ANIMACIÓN DE LOS CODITOS (DESLIZAMIENTO) --- */
+        .features { display: flex; flex-direction: column; gap: 10px; }
+        
+        .item {
+            background: var(--marrón); color: var(--blanco);
+            padding: 12px 25px; border-radius: 50px;
+            font-weight: 600; font-size: 0.85rem;
+            display: inline-block; width: fit-content;
+            opacity: 0; transform: translateX(-50px);
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Activación de la animación escalonada */
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+        .active .item:nth-child(4) { transition-delay: 0.8s; }
+        .active .item:nth-child(5) { transition-delay: 1.0s; }
+
+        .justicia-bg { position: absolute; bottom: 20px; right: 20px; width: 150px; opacity: 0.04; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header"><h1>Protección de Datos</h1></div>
+            <div class="menu-list">
+                <a onclick="changeSlide('inicio')" class="active">Portada</a>
+                <a onclick="changeSlide('agesic')">AGESIC y URCDP</a>
+                <a onclick="changeSlide('datos')">Datos Personales</a>
+                <a onclick="changeSlide('derechos')">Derechos ARCO</a>
+                <a onclick="changeSlide('obligaciones')">Obligaciones</a>
+                <a onclick="changeSlide('seguridad')">Seguridad y Riesgos</a>
+                <a onclick="changeSlide('impacto')">Impacto y Redes</a>
+                <a onclick="changeSlide('reflexion')">Reflexión Final</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-inicio" class="slide active">
+                <h2>Ley 18.331 - Habeas Data</h2>
+                <p>Presentación sobre el marco legal de la Protección de Datos Personales en Uruguay. Un derecho fundamental en la era digital.</p>
+                <div class="features">
+                    <span class="item">Derecho Humano Fundamental</span>
+                    <span class="item">Control de la Identidad Digital</span>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>El Rol de AGESIC y URCDP</h2>
+                <p>La **AGESIC** impulsa el gobierno digital, pero la **URCDP** es el órgano especializado que controla el cumplimiento de la ley.</p>
+                <div class="features">
+                    <span class="item">URCDP: Unidad Reguladora y de Control de Datos Personales</span>
+                    <span class="item">Recibe denuncias de ciudadanos ante abusos</span>
+                    <span class="item">Gestiona el Registro de Bases de Datos obligatorios</span>
+                    <span class="item">Poder sancionatorio ante incumplimientos</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>¿Qué son los Datos Personales?</h2>
+                <p>Es cualquier información que identifique a una persona física o la haga identificable.</p>
+                <div class="features">
+                    <span class="item">Datos Identificativos: Nombre, CI, teléfono, dirección</span>
+                    <span class="item">Datos Sensibles: Origen racial, religión, salud, política</span>
+                    <span class="item">Datos Biométricos: Iris, huella digital, rostro</span>
+                    <span class="item">El dato debe ser veraz y actualizado</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Derechos ARCO</h2>
+                <p>Son las facultades que tienes para controlar tu información personal.</p>
+                <div class="features">
+                    <span class="item"><b>A</b>cceso: Consultar tus datos en cualquier base</span>
+                    <span class="item"><b>R</b>ectificación: Pedir corrección de errores</span>
+                    <span class="item"><b>C</b>ancelación: Eliminar datos (Derecho al olvido)</span>
+                    <span class="item"><b>O</b>posición: Negarse al uso para fines publicitarios</span>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>Obligaciones de Organizaciones</h2>
+                <p>Toda entidad que maneje bases de datos debe seguir principios estrictos.</p>
+                <div class="features">
+                    <span class="item">Obtener el consentimiento previo e informado</span>
+                    <span class="item">Principio de Finalidad: No usar datos para otro fin</span>
+                    <span class="item">Inscripción obligatoria de la base en URCDP</span>
+                    <span class="item">Garantizar el secreto profesional</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Seguridad y Riesgos</h2>
+                <p>El responsable debe adoptar medidas técnicas para evitar incidentes.</p>
+                <div class="features">
+                    <span class="item">Riesgos: Hackeo, Robo de Identidad, Phishing</span>
+                    <span class="item">Cifrado de datos sensibles y copias de seguridad</span>
+                    <span class="item">Notificación obligatoria ante brechas de seguridad</span>
+                    <span class="item">Prevención del acceso no autorizado</span>
+                </div>
+            </div>
+
+            <div id="slide-impacto" class="slide">
+                <h2>Impacto y Redes Sociales</h2>
+                <p>La ley nos protege en el entorno digital donde compartimos información masivamente.</p>
+                <div class="features">
+                    <span class="item">Protección contra el acoso y spam comercial</span>
+                    <span class="item">Control sobre lo que las redes sociales guardan</span>
+                    <span class="item">Transparencia en el uso de algoritmos</span>
+                    <span class="item">Seguridad en transacciones electrónicas</span>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <h2>Reflexión Final</h2>
+                <p>La privacidad no es un lujo, es la base de nuestra libertad en la sociedad de la información.</p>
+                <div class="features">
+                    <span class="item">Relación directa con el uso ético de la IA</span>
+                    <span class="item">Fomentar la educación digital en Uruguay</span>
+                    <span class="item">La Ley 18.331: El escudo de nuestra identidad</span>
+                </div>
+            </div>
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3438/3438139.png" class="justicia-bg">
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
             border-right: 2px solid var(--marrón);
         }
 
