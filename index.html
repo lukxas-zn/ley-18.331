@@ -3,37 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Interactiva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Ley 18.331 - Presentación Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #d4af37; /* Dorado */
-            --secondary: #6e4c39; /* Marrón Canva */
-            --dark: #1a1a1a;
+            /* Colores extraídos de tus capturas de Canva */
+            --primary-brown: #6e4c39; /* El marrón de tus fotos */
+            --gold: #d4af37;
+            --cream: #fdfaf5;
+            --dark-text: #2c1e16;
             --white: #ffffff;
         }
 
-        body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Poppins', sans-serif; background: var(--dark); overflow: hidden; }
+        body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Poppins', sans-serif; background: #e8e3dc; overflow: hidden; }
 
-        /* --- CONTENEDOR DE SLIDES --- */
-        .slider-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
+        .slider-container { position: relative; width: 100vw; height: 100vh; }
 
         .slide {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease-in-out;
-            background: var(--white);
+            position: absolute; inset: 0; display: flex; opacity: 0; visibility: hidden;
+            transition: opacity 0.8s ease-in-out; background: var(--cream);
         }
 
         .slide.active { opacity: 1; visibility: visible; }
 
+        /* Estructura Canva: Texto a la izquierda, Imagen a la derecha */
+        .slide-content { flex: 1.2; padding: 60px; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
+        .slide-image { flex: 0.8; background-size: cover; background-position: center; position: relative; border-left: 8px solid var(--primary-brown); }
+
+        /* Animaciones de deslizamiento (sos) */
+        .animate-up { transform: translateY(30px); opacity: 0; transition: 0.8s ease-out; }
+        .active .animate-up { transform: translateY(0); opacity: 1; }
+
+        .feature-box {
+            background: var(--primary-brown); color: white; padding: 12px 25px;
+            margin: 8px 0; border-radius: 50px; display: inline-block;
+            font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Controles estilo Canva */
+        .controls { position: fixed; bottom: 30px; right: 40px; display: flex; gap: 15px; z-index: 100; }
+        .btn-nav {
+            background: var(--primary-brown); color: white; border: none;
+            width: 55px; height: 55px; border-radius: 50%; cursor: pointer;
+            font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .btn-nav:hover { background: var(--gold); transform: scale(1.1); }
+
+        .progress-bar { position: fixed; bottom: 0; left: 0; height: 6px; background: var(--gold); transition: width 0.3s; z-index: 101; }
+
+        h2 { font-size: 2.8rem; color: var(--primary-brown); margin: 0; font-weight: 800; line-height: 1.1; }
+        h3 { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 15px; }
+        p { font-size: 1.05rem; line-height: 1.6; color: var(--dark-text); max-width: 650px; }
+        
+        .logo-top { position: absolute; top: 40px; left: 60px; width: 50px; filter: sepia(1) saturate(2); }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slide active">
+            <div class="slide-content">
+                <img src="nombre-chino.png" class="logo-top" onerror="this.style.display='none'">
+                <h3 class="animate-up">Uruguay · Ley 18.331</h3>
+                <h2 class="animate-up">PROTECCIÓN DE DATOS PERSONALES</h2>
+                <p class="animate-up">Análisis de los aspectos principales y el impacto de la privacidad en la sociedad actual.</p>
+                <div class="animate-up" style="transition-delay: 0.4s;">
+                    <div class="feature-box">Presentación Digital · 2026</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">01. Introducción</h3>
+                <h2 class="animate-up">¿Qué es la Ley 18.331?</h2>
+                <p class="animate-up">Es el marco legal que garantiza el derecho a la protección de datos personales. Surge ante el avance masivo de la tecnología para evitar abusos de privacidad.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Objetivo: Control de la propia información</div><br>
+                    <div class="feature-box">Contexto: Sociedad hiperconectada</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">02. Conceptos</h3>
+                <h2 class="animate-up">Datos Personales</h2>
+                <p class="animate-up">Es toda información que permite identificar a una persona física de forma directa o indirecta.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Generales: Nombre, CI, Teléfono</div><br>
+                    <div class="feature-box">Sensibles: Salud, Ideología, Religión</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">03. Tus Herramientas</h3>
+                <h2 class="animate-up">Derechos de las Personas</h2>
+                <p class="animate-up">La ley otorga mecanismos para que tú seas el dueño de tu información en cualquier base de datos.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Acceso y Rectificación</div><br>
+                    <div class="feature-box">Eliminación (Derecho al Olvido)</div><br>
+                    <div class="feature-box">Impugnación de Valoraciones</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2959d43?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">04. El Rol de AGESIC</h3>
+                <h2 class="animate-up">Obligaciones</h2>
+                <p class="animate-up">Las organizaciones deben inscribir sus bases de datos ante la URCDP (AGESIC) y seguir principios éticos.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Consentimiento: Libre, previo e informado</div><br>
+                    <div class="feature-box">Finalidad: Usar los datos solo para el fin declarado</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">05. Protección Técnica</h3>
+                <h2 class="animate-up">Seguridad de Datos</h2>
+                <p class="animate-up">Es obligatorio implementar medidas para evitar filtraciones, hackeos o el robo de identidad digital.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Riesgos: Filtraciones masivas</div><br>
+                    <div class="feature-box">Protección: Cifrado y Auditorías</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000');"></div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h3 class="animate-up">06. Conclusión</h3>
+                <h2 class="animate-up">Impacto en la Sociedad</h2>
+                <p class="animate-up">Esta ley nos protege de ser manipulados por algoritmos y asegura que nuestra vida digital sea respetada en redes sociales y tecnología.</p>
+                <div class="animate-up">
+                    <div class="feature-box">Reflexión: Tu identidad no tiene precio</div>
+                </div>
+            </div>
+            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1000');"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-nav" onclick="prevSlide()">❮</button>
+        <button class="btn-nav" onclick="nextSlide()">❯</button>
+    </div>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+
+        function updateSlide() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            const percent = ((currentSlide + 1) / slides.length) * 100;
+            progress.style.width = percent + '%';
+        }
+
+        function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateSlide(); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSlide(); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        updateSlide();
+    </script>
+</body>
+</html>
         /* --- DISEÑO DE DIAPOSITIVA (Texto + Imagen) --- */
         .slide-content {
             flex: 1;
