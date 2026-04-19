@@ -3,37 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Profesional Correcta</title>
+    <title>Ley 18.331 - Presentación Profesional</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta de colores profesional 'Law Firm' */
-            --primary-brown: #6e4c39; /* Marrón elegante */
-            --gold: #d4af37;           /* Dorado Justicia */
-            --cream: #fdfaf5;          /* Fondo crema suave */
-            --dark-menu: #2c1e16;      /* Fondo de menú oscuro */
-            --white: #ffffff;
-            --text-dark: #333333;
-            --shadow: rgba(0,0,0,0.15);
+            --marrón: #6e4c39; /* El color de tu Canva */
+            --oro: #d4af37;
+            --crema: #fdfaf5;
+            --oscuro: #2c1e16;
+            --blanco: #ffffff;
         }
 
-        /* Estilos base para evitar scroll y fijar la presentación */
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            margin: 0; padding: 0; height: 100vh;
             font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-menu); /* Fondo oscuro general */
-            color: var(--text-dark);
-            overflow: hidden; /* No hay scroll global */
+            background-color: var(--oscuro);
+            overflow: hidden;
         }
 
-        /* --- PANTALLA DE ENTRADA (Mínima y sin fotos) --- */
-        #intro-screen {
-            position: fixed;
-            inset: 0;
-            background: var(--dark-menu); /* Fondo oscuro general */
+        #app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+        }
+
+        /* --- MENÚ LATERAL --- */
+        nav {
+            background-color: var(--oscuro);
+            color: var(--blanco);
+            padding: 30px 20px;
             display: flex;
+            flex-direction: column;
+            border-right: 2px solid var(--marrón);
+        }
+
+        .menu-header h1 {
+            font-size: 1rem;
+            color: var(--oro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 10px; }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.05); color: var(--blanco); }
+        nav a.active { background: var(--marrón); color: var(--blanco); font-weight: 600; }
+
+        /* --- AREA DE DIAPOSITIVAS --- */
+        main {
+            background-color: #e8e3dc;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 85%;
+            height: 80%;
+            background: var(--crema);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active { display: flex; animation: aparecer 0.6s forwards; }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h2 { color: var(--marrón); font-size: 2.2rem; border-bottom: 3px solid var(--oro); padding-bottom: 10px; margin-bottom: 20px; }
+        p { color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
+
+        /* --- CÁPSULAS ANIMADAS (ESTILO CANVA) --- */
+        .features { display: flex; flex-direction: column; gap: 12px; }
+        
+        .item {
+            background: var(--marrón);
+            color: var(--blanco);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: 0.6s ease-out;
+        }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+        .active .item:nth-child(4) { transition-delay: 0.8s; }
+
+        .justicia-bg {
+            position: absolute; bottom: 20px; right: 20px;
+            width: 200px; opacity: 0.05; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header">
+                <h1>LEY 18.331</h1>
+            </div>
+            <div class="menu-list">
+                <a onclick="changeSlide('inicio')" class="active">01. Portada</a>
+                <a onclick="changeSlide('que-es')">02. ¿Qué es la Ley?</a>
+                <a onclick="changeSlide('datos')">03. Datos Personales</a>
+                <a onclick="changeSlide('derechos')">04. Derechos ARCO</a>
+                <a onclick="changeSlide('obligaciones')">05. Obligaciones</a>
+                <a onclick="changeSlide('seguridad')">06. Seguridad</a>
+                <a onclick="changeSlide('impacto')">07. Impacto Social</a>
+                <a onclick="changeSlide('reflexion')">08. Reflexión</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-inicio" class="slide active">
+                <h2>Protección de Datos Personales</h2>
+                <p>Análisis jurídico sobre el tratamiento de la información y la privacidad en Uruguay. Presentación basada en la normativa de AGESIC.</p>
+                <div class="features">
+                    <span class="item">Habeas Data como Derecho Humano</span>
+                    <span class="item">Control sobre la Identidad Digital</span>
+                </div>
+            </div>
+
+            <div id="slide-que-es" class="slide">
+                <h2>02. ¿Qué es la Ley 18.331?</h2>
+                <p>Es la ley de Protección de Datos Personales y Acción de "Habeas Data". Surge para regular el uso de información por parte de empresas y el Estado.</p>
+                <div class="features">
+                    <span class="item">Objetivo: Proteger la privacidad</span>
+                    <span class="item">Surge ante el avance tecnológico masivo</span>
+                    <span class="item">Fiscalizada por la URCDP (Unidad de Control)</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>03. Datos Personales</h2>
+                <p>Cualquier información que permite identificarte. Se dividen en categorías según su importancia.</p>
+                <div class="features">
+                    <span class="item">Generales: Nombre, Cédula, Dirección</span>
+                    <span class="item">Sensibles: Salud, Ideología, Religión</span>
+                    <span class="item">Biométricos: Huella digital, Reconocimiento facial</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>04. Derechos de las Personas</h2>
+                <p>La ley te otorga 4 herramientas fundamentales conocidas como Derechos ARCO.</p>
+                <div class="features">
+                    <span class="item">Acceso: Saber qué datos tienen de ti</span>
+                    <span class="item">Rectificación: Corregir datos erróneos</span>
+                    <span class="item">Cancelación: Borrar tus datos (Derecho al olvido)</span>
+                    <span class="item">Oposición: Impedir que usen tus datos para algo específico</span>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>05. Obligaciones de Organizaciones</h2>
+                <p>Toda entidad (empresa, escuela, banco) debe cumplir reglas estrictas al manejar tus datos.</p>
+                <div class="features">
+                    <span class="item">Consentimiento previo e informado</span>
+                    <span class="item">Principio de Finalidad (Solo usar datos para lo que dijeron)</span>
+                    <span class="item">Confidencialidad absoluta</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>06. Seguridad de los Datos</h2>
+                <p>Las organizaciones son responsables de evitar incidentes que afecten a los ciudadanos.</p>
+                <div class="features">
+                    <span class="item">Riesgos: Hackeos y Robo de Identidad</span>
+                    <span class="item">Medidas: Cifrado y Firewalls</span>
+                    <span class="item">Reporte obligatorio ante filtraciones</span>
+                </div>
+            </div>
+
+            <div id="slide-impacto" class="slide">
+                <h2>07. Impacto en la Sociedad</h2>
+                <p>Esta ley protege al ciudadano del "perfilamiento" algorítmico y de la manipulación de información.</p>
+                <div class="features">
+                    <span class="item">Protege contra el acoso comercial</span>
+                    <span class="item">Asegura transparencia en el Estado</span>
+                    <span class="item">Evita la discriminación por datos sensibles</span>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <h2>08. Reflexión Final</h2>
+                <p>En un mundo hiperconectado, nuestra identidad digital es nuestro activo más valioso. La Ley 18.331 es el escudo que garantiza nuestra libertad.</p>
+                <div class="features">
+                    <span class="item">Relación directa con Redes Sociales</span>
+                    <span class="item">La privacidad es un derecho, no un privilegio</span>
+                </div>
+            </div>
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3438/3438139.png" class="justicia-bg">
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
             flex-direction: column;
             align-items: center;
             justify-content: center;
