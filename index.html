@@ -7,33 +7,364 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colores extraídos de tus capturas de Canva */
-            --primary-brown: #6e4c39; /* El marrón de tus fotos */
-            --gold: #d4af37;
-            --cream: #fdfaf5;
-            --dark-text: #2c1e16;
+            /* Paleta de colores inspirada en Canva y 'Law Firm' */
+            --primary: #c0392b; /* Rojo elegante tipo PowerPoint */
+            --dark: #2c3e50;
+            --secondary-dark: #1a252f;
+            --bg: #f5f6fa;
             --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ecf0f1;
+            --shadow: rgba(0,0,0,0.1);
         }
 
-        body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Poppins', sans-serif; background: #e8e3dc; overflow: hidden; }
+        /* Estilos base para evitar scroll y fijar la presentación */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark); /* Fondo oscuro general */
+            color: var(--text-dark);
+            overflow: hidden; /* No hay scroll global */
+        }
 
-        .slider-container { position: relative; width: 100vw; height: 100vh; }
+        /* Contenedor principal de 2 columnas fixed */
+        #app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+        }
 
+        /* --- MENÚ LATERAL FIXED --- */
+        nav {
+            background-color: var(--secondary-dark);
+            color: var(--white);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .menu-header { text-align: center; margin-bottom: 20px; }
+        .nombre-chino-img { max-width: 50px; filter: brightness(0) invert(1); opacity: 0.8; margin-bottom: 10px; }
+        
+        .menu-items h1 {
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Estilo de los botones del índice */
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a:hover {
+            color: var(--white);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* Estilo para el enlace activo */
+        nav a.active {
+            color: var(--white);
+            background-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.4);
+            font-weight: 600;
+        }
+
+        /* --- VISOR DE DIAPOSITIVAS (DERECHA) --- */
+        main {
+            padding: 40px;
+            position: relative;
+            background-color: var(--bg);
+            overflow: hidden; /* Sin scroll interno */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo base para cada diapositiva fixed */
         .slide {
-            position: absolute; inset: 0; display: flex; opacity: 0; visibility: hidden;
-            transition: opacity 0.8s ease-in-out; background: var(--cream);
+            position: absolute;
+            width: calc(100% - 80px); /* Padding de main */
+            height: calc(100% - 80px); /* Padding de main */
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            
+            /* Animación de entrada por diapositiva */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        .slide.active { opacity: 1; visibility: visible; }
+        /* Clase para mostrar la diapositiva activa */
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-        /* Estructura Canva: Texto a la izquierda, Imagen a la derecha */
-        .slide-content { flex: 1.2; padding: 60px; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
-        .slide-image { flex: 0.8; background-size: cover; background-position: center; position: relative; border-left: 8px solid var(--primary-brown); }
+        /* --- CONTENIDOS ESPECÍFICOS --- */
+        .slide h2 {
+            font-size: 2.2rem;
+            color: var(--secondary-dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
 
-        /* Animaciones de deslizamiento (sos) */
-        .animate-up { transform: translateY(30px); opacity: 0; transition: 0.8s ease-out; }
-        .active .animate-up { transform: translateY(0); opacity: 1; }
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+        }
 
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background-color: #fcfcfd;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            color: var(--secondary-dark);
+        }
+
+        /* Estilo para la Dama de la Justicia de fondo en la portada */
+        .slide-bg-icon {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- ANIMACIONES DE DESLIZAMIENTO TIPO CANVA --- */
+        /* Contenedor marrón de características tipo Canva image 17.png */
+        .features-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            background-color: var(--primary); /* El marrón Canva es este rojo legal */
+            color: var(--text-light);
+            padding: 15px 25px;
+            border-radius: 50px; /* Redondeado tipo cápsula de Canva */
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            
+            /* Propiedades de la animación de deslizamiento */
+            opacity: 0; /* Empiezan invisibles */
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
+        }
+
+        /* Estados para deslizar hacia adentro */
+        .feature-item.slide-in-right {
+            transform: translateX(50px);
+        }
+
+        .feature-item.slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        /* Clase activa para activar la animación cuando el slide esté activo */
+        .active .feature-item {
+            opacity: 1;
+            transform: translateX(0) !important;
+        }
+
+        /* Delays para que aparezcan uno tras otro (sos) */
+        .active .feature-item:nth-child(1) { transition-delay: 0.2s; }
+        .active .feature-item:nth-child(2) { transition-delay: 0.4s; }
+        .active .feature-item:nth-child(3) { transition-delay: 0.6s; }
+        .active .feature-item:nth-child(4) { transition-delay: 0.8s; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            #app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            nav {
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 10px;
+            }
+            .menu-list {
+                flex-direction: row;
+                gap: 5px;
+            }
+            main { padding: 10px; }
+            .slide { width: calc(100% - 20px); height: calc(100% - 20px); padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-items">
+                <div class="menu-header">
+                    <img src="nombre-chino.png" class="nombre-chino-img">
+                    <h1>Ley 18.331 Jurídica</h1>
+                </div>
+                <div class="menu-list">
+                    <a id="btn-inicio" onclick="changeSlide('inicio')" class="active">01. Portada</a>
+                    <a onclick="changeSlide('que-es')">02. ¿Qué es la Ley?</a>
+                    <a onclick="changeSlide('datos')">03. Datos Personales</a>
+                    <a onclick="changeSlide('derechos')">04. Derechos ARCO</a>
+                    <a onclick="changeSlide('obligaciones')">05. Obligaciones</a>
+                    <a onclick="changeSlide('seguridad')">06. Seguridad</a>
+                    <a onclick="changeSlide('reflexion')">07. Reflexión Final</a>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-inicio" class="slide active">
+                <div style="text-align:center; z-index:2;">
+                    <h1 style="font-size: 3rem; margin-bottom: 0; color: #333;">Protección de Datos Personales</h1>
+                    <p style="font-size: 1.5rem; color: var(--primary); font-weight: 600;">Habeas Data en Uruguay</p>
+                    <div style="width: 100px; height: 5px; background: var(--primary); margin: 20px auto;"></div>
+                    <button class="active" style="padding:10px 30px; background:var(--primary); color:white; border:none; border-radius:50px; font-weight:600; cursor:pointer;" onclick="changeSlide('que-es')">Empezar Presentación</button>
+                </div>
+                <img src="justicia.png" class="slide-bg-icon">
+            </div>
+
+            <div id="slide-que-es" class="slide">
+                <h2>02. ¿Qué es la Ley?</h2>
+                <p>Es la normativa que regula el tratamiento automatizado o manual de los datos personales para garantizar la privacidad y el derecho al Habeas Data.</p>
+                
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Protege tu Privacidad Digital</span>
+                    <span class="feature-item slide-in-right">Regula a Empresas y Estado</span>
+                    <span class="feature-item slide-in-left">Garantiza Derechos Fundamentales</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>03. ¿Qué son los Datos Personales?</h2>
+                <p>Toda información que permite identificar a una persona (CI, Nombre, Dirección, etc.).</p>
+                
+                <div class="features-container">
+                    <span class="feature-item slide-in-right">Datos Identificativos (Nombre, CI)</span>
+                    <span class="feature-item slide-in-left">Datos Sensibles (Salud, Religión, Política)</span>
+                    <span class="feature-item slide-in-right">Huellas Dactilares, Fotos y Voz</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>04. Derechos ARCO</h2>
+                <p>Son los cuatro derechos fundamentales que tienes sobre tu propia información.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Acceso: Saber qué datos tienen</span>
+                    <span class="feature-item slide-in-right">Rectificación: Corregir errores</span>
+                    <span class="feature-item slide-in-left">Cancelación: Borrar tus datos</span>
+                    <span class="feature-item slide-in-right">Oposición: Negarse al uso</span>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>05. Obligaciones de Organizaciones</h2>
+                <p>Toda entidad (pública o privada) que maneje datos debe hacerlo de forma responsable.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Solicitar Consentimiento Previo e Informado</span>
+                    <span class="feature-item slide-in-right">Usar Datos solo para el Fin Declarado</span>
+                    <span class="feature-item slide-in-left">Garantizar Veracidad de la Información</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>06. Seguridad de los Datos</h2>
+                <p>Riesgos en el manejo de bases de datos y medidas para proteger la información.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-right">Hackeos, Robo de Identidad, Secuestro de Datos</span>
+                    <span class="feature-item slide-in-left">Medidas Técnicas: Cifrado y Firewalls</span>
+                    <span class="feature-item slide-in-right">Denuncia ante AGESIC por Mal Uso</span>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <div style="text-align: center;">
+                    <h2>07. Reflexión Final</h2>
+                    <p style="font-size: 1.4rem; color: #333; line-height: 1.7; font-weight: 600; max-width: 700px; margin: auto;">"Tu privacidad no es negociable. La Ley 18.331 es el escudo que garantiza que sigas siendo dueño de tu propia identidad digital."</p>
+                </div>
+                <img src="justicia.png" class="slide-bg-icon">
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            // 1. Ocultar todas las diapositivas
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            // 2. Quitar estado activo de todos los enlaces del menú
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // 3. Activar la diapositiva seleccionada
+            const targetSlide = document.getElementById('slide-' + slideId);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+            }
+
+            // 4. Activar el enlace del menú correspondiente
+            // Buscamos el link cuyo onclick contiene el slideId
+            const activeLink = Array.from(navLinks).find(link => link.getAttribute('onclick').includes(slideId));
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
         .feature-box {
             background: var(--primary-brown); color: white; padding: 12px 25px;
             margin: 8px 0; border-radius: 50px; display: inline-block;
