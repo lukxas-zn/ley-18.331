@@ -3,37 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Profesional</title>
+    <title>Ley 18.331 - Presentación Jurídica</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta de colores inspirada en Canva y 'Law Firm' */
-            --primary: #c0392b; /* Rojo elegante tipo PowerPoint */
-            --dark: #2c3e50;
-            --secondary-dark: #1a252f;
-            --bg: #f5f6fa;
+            --primary-brown: #6e4c39; /* El marrón de tu Canva */
+            --gold: #d4af37;
+            --cream: #fdfaf5;
+            --dark-menu: #2c1e16;
             --white: #ffffff;
-            --text-dark: #333333;
-            --text-light: #ecf0f1;
-            --shadow: rgba(0,0,0,0.1);
+            --shadow: rgba(0,0,0,0.15);
         }
 
-        /* Estilos base para evitar scroll y fijar la presentación */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark); /* Fondo oscuro general */
-            color: var(--text-dark);
-            overflow: hidden; /* No hay scroll global */
+        body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Poppins', sans-serif; background-color: var(--dark-menu); overflow: hidden; }
+
+        /* --- PANTALLA DE ENTRADA --- */
+        #intro-screen {
+            position: fixed; inset: 0; background: var(--dark-menu);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        /* Contenedor principal de 2 columnas fixed */
-        #app-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            height: 100vh;
+        .justicia-icon { width: 150px; filter: sepia(1) saturate(2) brightness(0.8); margin-bottom: 20px; animation: glow 3s infinite; }
+        @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; filter: sepia(1) brightness(1.2); } }
+
+        .btn-entrar {
+            background: var(--gold); color: #000; border: none; padding: 18px 45px;
+            font-size: 1.1rem; font-weight: 800; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: 0.3s;
+        }
+        .btn-entrar:hover { transform: scale(1.05); background: var(--cream); }
+
+        /* --- ESTRUCTURA PRINCIPAL --- */
+        #app-container { display: none; grid-template-columns: 280px 1fr; height: 100vh; }
+
+        nav {
+            background-color: var(--dark-menu); color: var(--white); padding: 30px 20px;
+            display: flex; flex-direction: column; border-right: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .menu-header h1 { font-size: 0.8rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
+
+        .menu-list a {
+            color: rgba(255,255,255,0.6); text-decoration: none; padding: 12px 15px;
+            border-radius: 8px; font-size: 0.85rem; transition: 0.3s; cursor: pointer; display: block;
+        }
+        .menu-list a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+        .menu-list a.active { color: #000; background-color: var(--gold); font-weight: 700; }
+
+        /* --- VISOR DE DIAPOSITIVAS --- */
+        main { background-color: #e8e3dc; padding: 40px; display: flex; align-items: center; justify-content: center; position: relative; }
+
+        .slide {
+            position: absolute; width: 90%; height: 85%; background: var(--cream);
+            border-radius: 15px; padding: 50px; box-shadow: 0 15px 40px var(--shadow);
+            display: none; flex-direction: column; justify-content: center; overflow-y: auto;
+        }
+        .slide.active { display: flex; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slide h2 { font-size: 2.2rem; color: var(--primary-brown); border-bottom: 3px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; }
+        .slide p { font-size: 1rem; line-height: 1.6; color: #444; margin-bottom: 25px; }
+
+        /* --- CÁPSULAS DESLIZANTES --- */
+        .features-container { display: flex; flex-direction: column; gap: 12px; }
+        .feature-item {
+            background-color: var(--primary-brown); color: var(--cream);
+            padding: 14px 22px; border-radius: 50px; font-weight: 600; font-size: 0.9rem;
+            display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            opacity: 0; transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
+        }
+
+        .slide-in-right { transform: translateX(40px); }
+        .slide-in-left { transform: translateX(-40px); }
+
+        .active .feature-item { opacity: 1; transform: translateX(0) !important; }
+        .active .feature-item:nth-child(1) { transition-delay: 0.2s; }
+        .active .feature-item:nth-child(2) { transition-delay: 0.4s; }
+        .active .feature-item:nth-child(3) { transition-delay: 0.6s; }
+        .active .feature-item:nth-child(4) { transition-delay: 0.8s; }
+
+        .slide-bg-icon { position: absolute; bottom: 20px; right: 20px; width: 180px; opacity: 0.08; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <img src="justicia.png" class="justicia-icon" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3438/3438139.png'">
+        <h1 style="color: var(--white); margin-bottom: 30px; letter-spacing: 4px;">LEY 18.331</h1>
+        <button class="btn-entrar" onclick="entrar()">ENTRAR A LA PRESENTACIÓN</button>
+    </div>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header">
+                <img src="nombre-chino.png" style="width: 50px; margin-bottom: 10px; filter: invert(1);" onerror="this.style.display='none'">
+                <h1>Índice Jurídico</h1>
+            </div>
+            <div class="menu-list">
+                <a onclick="changeSlide('inicio')" class="active">01. Portada</a>
+                <a onclick="changeSlide('que-es')">02. ¿Qué es la Ley?</a>
+                <a onclick="changeSlide('agesic')">03. AGESIC y URCDP</a>
+                <a onclick="changeSlide('datos')">04. Datos Personales</a>
+                <a onclick="changeSlide('derechos')">05. Derechos ARCO</a>
+                <a onclick="changeSlide('obligaciones')">06. Obligaciones</a>
+                <a onclick="changeSlide('seguridad')">07. Seguridad</a>
+                <a onclick="changeSlide('reflexion')">08. Reflexión Final</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-inicio" class="slide active">
+                <h2>Protección de Datos Personales</h2>
+                <p>Análisis profundo de la Ley 18.331 y el derecho al Habeas Data en Uruguay. Una guía completa sobre privacidad digital.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Actualizado a 2026</span>
+                    <span class="feature-item slide-in-right">Enfoque en Derecho Digital</span>
+                </div>
+            </div>
+
+            <div id="slide-que-es" class="slide">
+                <h2>02. ¿Qué es la Ley 18.331?</h2>
+                <p>Es la normativa uruguaya que reconoce la protección de datos como un derecho humano. Busca que cada ciudadano tenga el "poder de disposición" sobre su información.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Promulgada en 2008</span>
+                    <span class="feature-item slide-in-right">Equivalente al GDPR Europeo</span>
+                    <span class="feature-item slide-in-left">Aplica a Bases Públicas y Privadas</span>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>03. El Rol de AGESIC</h2>
+                <p>La AGESIC gestiona la tecnología del estado, pero la <b>URCDP</b> (Unidad Reguladora y de Control de Datos Personales) es quien vigila el cumplimiento de esta ley.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-right">Recibe denuncias de ciudadanos</span>
+                    <span class="feature-item slide-in-left">Sanciona a empresas que filtran datos</span>
+                    <span class="feature-item slide-in-right">Lleva el Registro de Bases de Datos</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>04. Clasificación de Datos</h2>
+                <p>La ley no trata toda la información igual. Dependiendo de qué tan privado sea el dato, su protección aumenta.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Datos Sensibles: Salud, Religión, Política</span>
+                    <span class="feature-item slide-in-right">Datos Identificativos: CI, Nombre, Domicilio</span>
+                    <span class="feature-item slide-in-left">Datos Biométricos: Huella y Rostro</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>05. Tus Derechos ARCO</h2>
+                <p>Son las herramientas legales que tienes para defender tu privacidad ante cualquier organización.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left"><b>A</b>cceso: Saber qué tienen de ti</span>
+                    <span class="feature-item slide-in-right"><b>R</b>ectificación: Corregir errores</span>
+                    <span class="feature-item slide-in-left"><b>C</b>ancelación: Pedir que borren tus datos</span>
+                    <span class="feature-item slide-in-right"><b>O</b>posición: Negar el uso para publicidad</span>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>06. Obligaciones Legales</h2>
+                <p>Cualquier empresa que guarde datos (como un supermercado o un banco) tiene deberes estrictos.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-left">Veracidad: Los datos deben ser exactos</span>
+                    <span class="feature-item slide-in-right">Finalidad: No usar datos para otra cosa</span>
+                    <span class="feature-item slide-in-left">Confidencialidad: Secreto profesional</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>07. Seguridad y Hackeo</h2>
+                <p>La ley exige medidas técnicas para evitar incidentes de seguridad que afecten a las personas físicas.</p>
+                <div class="features-container">
+                    <span class="feature-item slide-in-right">Cifrado de datos sensibles</span>
+                    <span class="feature-item slide-in-left">Notificación de brechas de seguridad</span>
+                    <span class="feature-item slide-in-right">Prevención del Robo de Identidad</span>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <h2 style="text-align: center;">Reflexión Final</h2>
+                <p style="text-align: center; font-weight: 600; font-size: 1.2rem; color: var(--primary-brown);">"En el mundo digital, la privacidad no es un lujo, es un derecho fundamental que debemos ejercer."</p>
+                <div class="features-container" style="align-items: center;">
+                    <span class="feature-item slide-in-left">Seamos dueños de nuestra identidad</span>
+                    <span class="feature-item slide-in-right">Informarnos es el primer paso</span>
+                </div>
+            </div>
+
+            <img src="justicia.png" class="slide-bg-icon" onerror="this.style.display='none'">
+        </main>
+    </div>
+
+    <script>
+        function entrar() {
+            document.getElementById('intro-screen').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('app-container').style.display = 'grid';
+            }, 800);
+        }
+
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            document.getElementById('slide-' + slideId).classList.add('active');
+            
+            const activeLink = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (activeLink) activeLink.classList.add('active');
+        }
+    </script>
+</body>
+</html>
             position: fixed;
             width: 100%;
         }
