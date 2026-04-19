@@ -3,37 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Jurídica</title>
+    <title>Ley 18.331 - Presentación Profesional Correcta</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-brown: #6e4c39; /* El marrón de tu Canva */
-            --gold: #d4af37;
-            --cream: #fdfaf5;
-            --dark-menu: #2c1e16;
+            /* Paleta de colores profesional 'Law Firm' */
+            --primary-brown: #6e4c39; /* Marrón elegante */
+            --gold: #d4af37;           /* Dorado Justicia */
+            --cream: #fdfaf5;          /* Fondo crema suave */
+            --dark-menu: #2c1e16;      /* Fondo de menú oscuro */
             --white: #ffffff;
+            --text-dark: #333333;
             --shadow: rgba(0,0,0,0.15);
         }
 
-        body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Poppins', sans-serif; background-color: var(--dark-menu); overflow: hidden; }
-
-        /* --- PANTALLA DE ENTRADA --- */
-        #intro-screen {
-            position: fixed; inset: 0; background: var(--dark-menu);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 1000; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        /* Estilos base para evitar scroll y fijar la presentación */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-menu); /* Fondo oscuro general */
+            color: var(--text-dark);
+            overflow: hidden; /* No hay scroll global */
         }
 
-        .justicia-icon { width: 150px; filter: sepia(1) saturate(2) brightness(0.8); margin-bottom: 20px; animation: glow 3s infinite; }
-        @keyframes glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; filter: sepia(1) brightness(1.2); } }
+        /* --- PANTALLA DE ENTRADA (Mínima y sin fotos) --- */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--dark-menu); /* Fondo oscuro general */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        /* Mazo de madera animado */
+        .gavel-icon {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: mazoJusticia 2s infinite;
+        }
+
+        @keyframes mazoJusticia {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(0deg) scale(1.1); filter: drop-shadow(0 0 20px var(--gold)); }
+        }
 
         .btn-entrar {
-            background: var(--gold); color: #000; border: none; padding: 18px 45px;
-            font-size: 1.1rem; font-weight: 800; border-radius: 50px; cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: 0.3s;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            animation: aparecerBoton 1s forwards 0.5s; /* Aparece con retraso */
+            opacity: 0;
         }
         .btn-entrar:hover { transform: scale(1.05); background: var(--cream); }
 
+        @keyframes aparecerBoton { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- CONTENEDOR PRINCIPAL DE 2 COLUMNAS FIXED --- */
+        #app-container {
+            display: none; /* Empieza oculto */
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* --- MENÚ LATERAL FIXED --- */
+        nav {
+            background-color: var(--dark-menu);
+            color: var(--white);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 2px solid var(--gold);
+            z-index: 10;
+        }
+
+        .menu-header h1 {
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Estilo de los botones del índice */
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a:hover {
+            color: var(--white);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* Estilo para el enlace activo */
+        nav a.active {
+            color: var(--white);
+            background-color: var(--primary-brown);
+            box-shadow: 0 4px 10px rgba(110, 76, 57, 0.4);
+            font-weight: 600;
+        }
+
+        /* --- VISOR DE DIAPOSITIVAS (DERECHA) --- */
+        main {
+            padding: 40px;
+            position: relative;
+            background-color: #e8e3dc; /* Fondo gris claro tipo Law Firm */
+            overflow: hidden; /* Sin scroll interno */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo base para cada diapositiva fixed */
+        .slide {
+            position: absolute;
+            width: calc(100% - 80px); /* Padding de main */
+            height: calc(100% - 80px); /* Padding de main */
+            background-color: var(--cream);
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Clase para mostrar la diapositiva activa */
+        .slide.active {
+            display: flex;
+            animation: slide3D 0.7s forwards;
+        }
+
+        @keyframes slide3D {
+            from { opacity: 0; transform: translateZ(-500px); }
+            to { opacity: 1; transform: translateZ(0); }
+        }
+
+        /* --- CONTENIDOS ESPECÍFICOS --- */
+        .slide h2 {
+            font-size: 2.2rem;
+            color: var(--primary-brown);
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            max-width: 800px;
+        }
+
+        /* Cápsulas de información tipo Canva image 17.png */
+        .features-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            background-color: var(--primary-brown);
+            color: var(--cream);
+            padding: 15px 25px;
+            border-radius: 50px; /* Redondeado tipo cápsula */
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            
+            /* Propiedades de la animación de deslizamiento */
+            opacity: 0; /* Empiezan invisibles */
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
+        }
+
+        /* Estados para deslizar hacia adentro */
+        .feature-item.slide-in-right { transform: translateX(50px); }
+        .feature-item.slide-in-left { transform: translateX(-50px); }
+
+        /* Clase activa para activar la animación cuando el slide esté activo */
+        .active .feature-item {
+            opacity: 1;
+            transform: translateX(0) !important;
+        }
+
+        /* Delays para que aparezcan uno tras otro */
+        .active .feature-item:nth-child(1) { transition-delay: 0.2s; }
+        .active .feature-item:nth-child(2) { transition-delay: 0.4s; }
+        .active .feature-item:nth-child(3) { transition-delay: 0.6s; }
+        .active .feature-item:nth-child(4) { transition-delay: 0.8s; }
+
+        /* Icono de justicia sutil de fondo */
+        .slide-bg-icon {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 250px;
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            #app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            nav {
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 10px;
+            }
+            .menu-list {
+                flex-direction: row;
+                gap: 5px;
+            }
+            main { padding: 10px; }
+            .slide { width: calc(100% - 20px); height: calc(100% - 20px); padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="gavel-icon">⚖️</div>
+        <button class="btn-entrar" onclick="activarPresentacion()">ENTRAR A LA LEY</button>
+    </div>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-items">
+                <div class="menu-header">
+                    <img src="nombre-chino.png" style="width: 50px; filter: invert(1); margin-bottom: 10px;" onerror="this.style.display='none'">
+                    <h1>Ley 18.331 Jurídica</h1>
+                </div>
+                <div class="menu-list">
+                    <a id="btn-inicio" onclick="changeSlide('inicio')" class="active">01. Portada</a>
+                    <a onclick="changeSlide('que-es')">02. ¿Qué es la Ley?</a>
+                    <a onclick="changeSlide('agesic')">03. El Rol de AGESIC</a>
+                    <a onclick="
         /* --- ESTRUCTURA PRINCIPAL --- */
         #app-container { display: none; grid-template-columns: 280px 1fr; height: 100vh; }
 
