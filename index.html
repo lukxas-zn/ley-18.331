@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Profesional</title>
+    <title>Ley 18.331 - Informe Técnico</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -34,6 +34,208 @@
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
+            border-right: 2px solid var(--marrón);
+        }
+
+        .menu-header h1 {
+            font-size: 0.9rem;
+            color: var(--oro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid var(--oro);
+            padding: 10px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 8px; }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.05); }
+        nav a.active { background: var(--marrón); color: var(--blanco); font-weight: 600; }
+
+        /* --- ÁREA DE DIAPOSITIVAS --- */
+        main {
+            background-color: #e8e3dc;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 88%;
+            height: 88%;
+            background: var(--crema);
+            border-radius: 15px;
+            padding: 40px 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active { display: flex; animation: fadeSlide 0.5s forwards; }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 1.8rem; border-bottom: 3px solid var(--oro); padding-bottom: 10px; margin-bottom: 20px; }
+
+        /* --- CODITOS DESLIZANTES CON TEXTO LARGO --- */
+        .features { display: flex; flex-direction: column; gap: 15px; }
+        
+        .item {
+            background: var(--marrón);
+            color: var(--blanco);
+            padding: 18px 25px;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 6px solid var(--oro);
+        }
+
+        .item strong { color: var(--oro); display: block; margin-bottom: 5px; font-size: 1rem; }
+        .item span { font-size: 0.88rem; line-height: 1.4; display: block; }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+        .active .item:nth-child(4) { transition-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header">
+                <h1>Ley 18.331</h1>
+            </div>
+            <div class="menu-list">
+                <a onclick="changeSlide('intro')" class="active">Introducción</a>
+                <a onclick="changeSlide('agesic')">AGESIC y URCDP</a>
+                <a onclick="changeSlide('derechos')">Derechos ARCO</a>
+                <a onclick="changeSlide('obligaciones')">Obligaciones</a>
+                <a onclick="changeSlide('seguridad')">Seguridad Digital</a>
+                <a onclick="changeSlide('impacto')">Impacto en Redes</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-intro" class="slide active">
+                <h2>Marco Legal de Protección</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>¿Qué es el Habeas Data?</strong>
+                        <span>Es la garantía constitucional que permite a cualquier persona conocer qué datos suyos están en registros públicos o privados y exigir su corrección o eliminación.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Ámbito de Aplicación</strong>
+                        <span>Esta ley protege a todas las personas físicas y jurídicas, regulando cómo las empresas deben tratar la información para no vulnerar la dignidad humana.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>Control Estatal (AGESIC)</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>Función de la AGESIC</strong>
+                        <span>Sirve para liderar la estrategia de Gobierno Digital en Uruguay, asegurando que el Estado sea eficiente y use la tecnología de forma transparente.</span>
+                    </div>
+                    <div class="item">
+                        <strong>El Poder de la URCDP</strong>
+                        <span>Es la Unidad Reguladora. Sirve para fiscalizar a las empresas, recibir tus denuncias y aplicar sanciones económicas si se filtran tus datos.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Registro Obligatorio</strong>
+                        <span>Todas las bases de datos del país deben estar inscritas aquí para que el ciudadano sepa quién tiene su información y con qué fin.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Tus Derechos Fundamentales</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>Derecho de Acceso y Rectificación</strong>
+                        <span>Sirve para obtener información gratuita de tus datos cada 6 meses y corregir errores que puedan perjudicarte en créditos o trámites.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Derecho de Supresión (Derecho al Olvido)</strong>
+                        <span>Sirve para exigir que borren tus datos si la finalidad para la que los diste ya terminó o si se obtuvieron de forma ilegal.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>Obligaciones de las Empresas</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>Consentimiento Informado</strong>
+                        <span>Las empresas no pueden usar tus datos sin avisarte claramente para qué los quieren y obtener tu permiso explícito.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Principio de Finalidad y Veracidad</strong>
+                        <span>Los datos deben ser exactos y solo pueden usarse para lo que se prometió. No se pueden vender a terceros sin autorización.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Riesgos y Seguridad Técnica</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>Medidas de Protección</strong>
+                        <span>Sirven para obligar a las entidades a usar cifrado, firewalls y protocolos que eviten el hackeo y el robo de identidad.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Sanciones Administrativas</strong>
+                        <span>La ley establece multas graves y clausura de bases de datos para las empresas que sean negligentes con la seguridad.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-impacto" class="slide">
+                <h2>Privacidad y Redes Sociales</h2>
+                <div class="features">
+                    <div class="item">
+                        <strong>Control de la Identidad Digital</strong>
+                        <span>Sirve para protegernos frente al perfilamiento de algoritmos y asegurar que nuestra vida privada en redes no sea explotada comercialmente sin control.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
             border-right: 2px solid var(--marrón);
         }
 
