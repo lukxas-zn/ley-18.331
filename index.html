@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Análisis Jurídico Completo</title>
+    <title>Ley 18.331 - Manual Jurídico</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,7 +11,7 @@
             --oro: #d4af37;
             --crema: #fdfaf5;
             --oscuro: #2c1e16;
-            --blanco: #ffffff;
+            --texto: #333;
         }
 
         body, html {
@@ -23,17 +23,168 @@
 
         #app-container {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 280px 1fr;
             height: 100vh;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- MENÚ LATERAL --- */
         nav {
             background-color: var(--oscuro);
-            color: var(--blanco);
             padding: 25px;
-            display: flex; flex-direction: column;
             border-right: 3px solid var(--marrón);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-header h1 {
+            font-size: 0.9rem; color: var(--oro);
+            text-align: center; border: 1px solid var(--oro);
+            padding: 10px; margin-bottom: 30px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 12px; font-size: 0.8rem; cursor: pointer;
+            border-radius: 5px; transition: 0.3s; margin-bottom: 5px;
+        }
+
+        nav a.active { background: var(--marrón); color: white; font-weight: bold; }
+
+        /* --- CONTENIDO --- */
+        main { background-color: #e8e3dc; padding: 30px; display: flex; align-items: center; justify-content: center; }
+
+        .slide {
+            position: absolute; width: 85%; height: 85%;
+            background: var(--crema); border-radius: 10px;
+            padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow-y: auto;
+        }
+
+        .slide.active { display: flex; animation: slideUp 0.5s ease-out; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { color: var(--marrón); margin-top: 0; border-bottom: 2px solid var(--oro); padding-bottom: 10px; }
+        
+        /* --- ESTILO DE LOS "CODITOS" EXPLICATIVOS --- */
+        .info-block {
+            display: flex; flex-direction: column; gap: 15px; margin-top: 20px;
+        }
+
+        .feature-box {
+            background: var(--marrón);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border-left: 6px solid var(--oro);
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .active .feature-box { opacity: 1; transform: translateX(0); }
+        .feature-box strong { color: var(--oro); display: block; margin-bottom: 5px; font-size: 1rem; }
+        .feature-box span { font-size: 0.85rem; line-height: 1.4; display: block; opacity: 0.9; }
+
+        /* Delays para la animación */
+        .active .feature-box:nth-child(1) { transition-delay: 0.2s; }
+        .active .feature-box:nth-child(2) { transition-delay: 0.4s; }
+        .active .feature-box:nth-child(3) { transition-delay: 0.6s; }
+        .active .feature-box:nth-child(4) { transition-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header"><h1>GUÍA LEY 18.331</h1></div>
+            <div class="menu-list">
+                <a onclick="changeSlide('intro')" class="active">01. Función de la Ley</a>
+                <a onclick="changeSlide('agesic')">02. Control (AGESIC/URCDP)</a>
+                <a onclick="changeSlide('datos')">03. Tipos de Datos</a>
+                <a onclick="changeSlide('derechos')">04. Derechos del Titular</a>
+                <a onclick="changeSlide('obligaciones')">05. Deberes de Empresas</a>
+                <a onclick="changeSlide('seguridad')">06. Seguridad Digital</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-intro" class="slide active">
+                <h2>¿Para qué sirve esta Ley?</h2>
+                <div class="info-block">
+                    <div class="feature-box">
+                        <strong>Protección del Derecho a la Identidad</strong>
+                        <span>Sirve para evitar que otros utilicen tu nombre, imagen o datos para fines que tú no autorizaste, protegiendo tu reputación.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Garantía de Habeas Data</strong>
+                        <span>Es la herramienta legal que te permite acudir a la justicia si una empresa se niega a mostrarte qué información tiene sobre ti.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Control del Poder Informático</strong>
+                        <span>Sirve para poner límites a los algoritmos y grandes bases de datos, evitando que se tomen decisiones automáticas que te perjudiquen.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>Órganos de Control: AGESIC y URCDP</h2>
+                <div class="info-block">
+                    <div class="feature-box">
+                        <strong>Función de la URCDP</strong>
+                        <span>Sirve como el "juez" de tus datos. Es donde vas a denunciar si una empresa te manda spam o no quiere borrar tus datos.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Rol de la AGESIC</strong>
+                        <span>Sirve para modernizar el Estado Uruguayo, asegurando que todos los trámites digitales del gobierno cumplan con la seguridad necesaria.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Registro de Bases de Datos</strong>
+                        <span>Sirve para que el Estado sepa quién tiene datos de la gente. Si una empresa no registra su base, puede ser sancionada.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>Clasificación de la Información</h2>
+                <div class="info-block">
+                    <div class="feature-box">
+                        <strong>Datos Especialmente Protegidos</strong>
+                        <span>Sirven para identificar información "sensible" (salud, religión, política). La ley prohíbe tratarlos sin un consentimiento muy estricto.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Datos Biométricos</strong>
+                        <span>Sirven para identificarte por quién eres (huella, rostro). Al ser irreemplazables, la ley exige que el cifrado sea mucho más fuerte.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Datos de Antecedentes</strong>
+                        <span>Sirve para regular la información judicial. Nadie puede usar tu pasado legal para discriminarte en un trabajo sin base legal.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>¿Para qué sirven los Derechos ARCO?</h2>
+                <div class="info-block">
+                    <div class="feature-box">
+                        <strong>Derecho de Acceso</strong>
+                        <span>Sirve para que puedas pedirle a cualquier banco o empresa una copia de TODO lo que saben de ti, de forma gratuita.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Derecho de Rectificación</strong>
+                        <span>Sirve para limpiar tu historial. Si un clearing o una empresa tiene un dato viejo o falso tuyo, están obligados a corregirlo.</span>
+                    </div>
+                    <div class="feature-box">
+                        <strong>Derecho de Supresión (Olvido)</strong>
+                        <span>Sirve para pedir que eliminen tus datos cuando ya no hay razón para que los tengan (por ejemplo, tras cerrar una cuenta).</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>Responsabilidades de las Empresas</h2>
+                <div class="info
         }
 
         .menu-header h1 {
