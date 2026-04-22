@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley 18.331 - Análisis Jurídico Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --marrón: #6e4c39;
+            --oro: #d4af37;
+            --crema: #fdfaf5;
+            --oscuro: #2c1e16;
+            --blanco: #ffffff;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--oscuro);
+            overflow: hidden;
+        }
+
+        #app-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background-color: var(--oscuro);
+            color: var(--blanco);
+            padding: 25px;
+            display: flex; flex-direction: column;
+            border-right: 3px solid var(--marrón);
+        }
+
+        .menu-header h1 {
+            font-size: 0.85rem; color: var(--oro);
+            text-transform: uppercase; letter-spacing: 2px;
+            text-align: center; margin-bottom: 30px;
+            border: 1px solid var(--oro); padding: 10px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 6px; }
+
+        nav a {
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 10px 15px; border-radius: 5px;
+            font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+            border-left: 0 solid var(--oro);
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.05); color: var(--blanco); }
+        nav a.active { 
+            background: var(--marrón); 
+            color: var(--blanco); 
+            font-weight: 700;
+            border-left: 5px solid var(--oro);
+        }
+
+        /* --- VISOR --- */
+        main {
+            background-color: #e8e3dc; padding: 40px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .slide {
+            position: absolute; width: 88%; height: 88%;
+            background: var(--crema); border-radius: 15px;
+            padding: 40px 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: none; flex-direction: column; overflow-y: auto;
+        }
+
+        .slide.active { display: flex; animation: slideIn 0.5s ease-out; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 1.8rem; margin: 0 0 15px 0; text-transform: uppercase; }
+        .sub { color: var(--oro); font-weight: 700; margin-bottom: 20px; display: block; font-size: 0.9rem; }
+        p { color: #333; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+
+        /* --- ANIMACIÓN DE CODITOS --- */
+        .features { display: flex; flex-direction: column; gap: 8px; }
+        
+        .item {
+            background: var(--marrón); color: var(--blanco);
+            padding: 10px 20px; border-radius: 4px 20px 20px 4px;
+            font-weight: 600; font-size: 0.85rem;
+            display: inline-block; width: fit-content;
+            opacity: 0; transform: translateX(-100px);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--oro);
+        }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.1s; }
+        .active .item:nth-child(2) { transition-delay: 0.2s; }
+        .active .item:nth-child(3) { transition-delay: 0.3s; }
+        .active .item:nth-child(4) { transition-delay: 0.4s; }
+        .active .item:nth-child(5) { transition-delay: 0.5s; }
+        .active .item:nth-child(6) { transition-delay: 0.6s; }
+
+        .justicia-bg { position: absolute; bottom: 20px; right: 20px; width: 120px; opacity: 0.05; }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header"><h1>Expediente Ley 18.331</h1></div>
+            <div class="menu-list">
+                <a onclick="changeSlide('intro')" class="active">01. Introducción Legal</a>
+                <a onclick="changeSlide('principios')">02. Principios Rectores</a>
+                <a onclick="changeSlide('agesic')">03. AGESIC y URCDP</a>
+                <a onclick="changeSlide('datos')">04. Categorías de Datos</a>
+                <a onclick="changeSlide('derechos')">05. Derechos ARCO+</a>
+                <a onclick="changeSlide('responsables')">06. Responsables y Encargados</a>
+                <a onclick="changeSlide('seguridad')">07. Seguridad y Sanciones</a>
+                <a onclick="changeSlide('reflexion')">08. Conclusión Final</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-intro" class="slide active">
+                <h2>Protección de Datos Personales</h2>
+                <span class="sub">Marco Normativo Uruguayo</span>
+                <p>La Ley 18.331 regula el derecho fundamental a la protección de datos personales. Uruguay es considerado un "país seguro" por la Unión Europea, lo que permite el flujo libre de información bajo estándares internacionales.</p>
+                <div class="features">
+                    <span class="item">Derecho Humano de base Constitucional</span>
+                    <span class="item">Aplica a personas físicas y jurídicas</span>
+                    <span class="item">Regula bases de datos públicas y privadas</span>
+                </div>
+            </div>
+
+            <div id="slide-principios" class="slide">
+                <h2>Principios de la Ley</h2>
+                <span class="sub">Reglas de oro para el tratamiento</span>
+                <p>Para que el manejo de datos sea legal, se deben cumplir principios estrictos que eviten el abuso de poder informativo.</p>
+                <div class="features">
+                    <span class="item">Legalidad: El tratamiento debe estar amparado por ley</span>
+                    <span class="item">Finalidad: Los datos no pueden usarse para fines distintos</span>
+                    <span class="item">Veracidad: La información debe ser exacta y actualizada</span>
+                    <span class="item">Consentimiento: Debe ser libre, previo e informado</span>
+                    <span class="item">Seguridad: Obligación de proteger contra hackeos</span>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>El Ecosistema de Control</h2>
+                <span class="sub">Órganos de Regulación</span>
+                <p>Uruguay cuenta con una estructura técnica liderada por AGESIC, pero con autonomía de control a través de la URCDP.</p>
+                <div class="features">
+                    <span class="item">AGESIC: Define la estrategia de Gobierno Digital</span>
+                    <span class="item">URCDP: Órgano desconcentrado con autonomía técnica</span>
+                    <span class="item">Función: Dictar normas, asesorar y fiscalizar</span>
+                    <span class="item">Registro: Inscripción obligatoria de bases de datos</span>
+                    <span class="item">Denuncias: Cualquier ciudadano puede iniciar procesos aquí</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>Clasificación de la Información</h2>
+                <span class="sub">¿Qué estamos protegiendo?</span>
+                <p>No todos los datos tienen el mismo nivel de riesgo. La ley distingue datos generales de aquellos que podrían causar discriminación.</p>
+                <div class="features">
+                    <span class="item">Datos Especialmente Protegidos (Sensibles)</span>
+                    <span class="item">Salud, vida sexual, creencias y afiliación política</span>
+                    <span class="item">Datos Biométricos (identidad única por rasgos físicos)</span>
+                    <span class="item">Datos relativos a antecedentes penales</span>
+                    <span class="item">Prohibición de crear bases de datos sensibles sin ley</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Derechos de los Titulares</h2>
+                <span class="sub">El poder del ciudadano</span>
+                <p>La ley garantiza que tú seas el dueño de tu información. El ejercicio de estos derechos es gratuito para el titular.</p>
+                <div class="features">
+                    <span class="item">Acceso: Solicitar copia de tus datos cada 6 meses</span>
+                    <span class="item">Rectificación: Corregir datos falsos o incompletos</span>
+                    <span class="item">Actualización: Incluir información reciente</span>
+                    <span class="item">Supresión/Cancelación: El "Derecho al Olvido"</span>
+                    <span class="item">Impugnación de valoraciones personales automáticas</span>
+                </div>
+            </div>
+
+            <div id="slide-responsables" class="slide">
+                <h2>Sujetos Obligados</h2>
+                <span class="sub">Responsables vs. Encargados</span>
+                <p>Es vital distinguir quién decide sobre los datos y quién simplemente los procesa por encargo.</p>
+                <div class="features">
+                    <span class="item">Responsable: Quien decide la finalidad del tratamiento</span>
+                    <span class="item">Encargado: Quien trata datos en nombre del responsable</span>
+                    <span class="item">Transferencia Internacional: Reglas para enviar datos fuera</span>
+                    <span class="item">Contratos: Deben existir cláusulas de confidencialidad</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Infracciones y Castigos</h2>
+                <span class="sub">Consecuencias del Incumplimiento</span>
+                <p>El mal manejo de datos no solo es éticamente incorrecto, sino que conlleva sanciones económicas y administrativas graves.</p>
+                <div class="features">
+                    <span class="item">Infracciones Leves: No inscribir bases de datos</span>
+                    <span class="item">Infracciones Graves: Vulnerar principios de seguridad</span>
+                    <span class="item">Sanciones: Advertencias, Multas (UI) y Clausura de bases</span>
+                    <span class="item">Responsabilidad Civil: Indemnización por daños y perjuicios</span>
+                    <span class="item">Publicación de la resolución sancionatoria</span>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <h2>Conclusión y Ética Digital</h2>
+                <span class="sub">El futuro de la privacidad</span>
+                <p>Con la Inteligencia Artificial y el Big Data, la Ley 18.331 es más relevante que nunca para evitar la vigilancia masiva y el perfilamiento discriminatorio.</p>
+                <div class="features">
+                    <span class="item">Protección frente a Redes Sociales y Cookies</span>
+                    <span class="item">Necesidad de Educación Digital desde la escuela</span>
+                    <span class="item">La privacidad como pilar de la Democracia</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+  </html>
+  
