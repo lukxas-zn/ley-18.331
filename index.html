@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Presentación Técnica</title>
+    <title>Tarea: Ley 18.331 y AGESIC</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,29 +11,197 @@
             --oro: #d4af37;
             --crema: #fdfaf5;
             --oscuro: #2c1e16;
-            --blanco: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100vh;
             font-family: 'Poppins', sans-serif;
-            background-color: var(--oscuro);
+            background: linear-gradient(rgba(44,30,22,0.8), rgba(44,30,22,0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
             overflow: hidden;
         }
 
         #app-container {
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 300px 1fr;
             height: 100vh;
+            backdrop-filter: blur(5px);
         }
 
         /* --- MENÚ LATERAL --- */
         nav {
-            background-color: var(--oscuro);
-            color: var(--blanco);
+            background-color: rgba(44, 30, 22, 0.9);
             padding: 30px 20px;
-            display: flex; flex-direction: column;
-            border-right: 2px solid var(--marrón);
+            border-right: 2px solid var(--oro);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-header h1 {
+            font-size: 1rem; color: var(--oro);
+            text-align: center; border: 1px solid var(--oro);
+            padding: 10px; margin-bottom: 40px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 10px; }
+
+        nav a {
+            color: rgba(255,255,255,0.7); text-decoration: none;
+            padding: 12px 15px; border-radius: 8px;
+            font-size: 0.9rem; cursor: pointer; transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(212, 175, 55, 0.2); color: white; }
+        nav a.active { background: var(--marrón); color: white; font-weight: 600; border-left: 5px solid var(--oro); }
+
+        /* --- ÁREA DE CONTENIDO --- */
+        main {
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 85%; height: 85%;
+            background: rgba(253, 250, 245, 0.95);
+            border-radius: 15px; padding: 40px 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: none; flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active { display: flex; animation: slideIn 0.6s ease-out; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 1.8rem; border-bottom: 2px solid var(--oro); padding-bottom: 10px; }
+
+        /* --- BLOQUES DE RESPUESTAS (CODITOS) --- */
+        .info-block { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+
+        .item {
+            background: var(--marrón); color: white;
+            padding: 20px; border-radius: 10px;
+            opacity: 0; transform: translateX(-50px);
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 6px solid var(--oro);
+        }
+
+        .item strong { color: var(--oro); display: block; margin-bottom: 8px; font-size: 1.1rem; }
+        .item span { font-size: 0.9rem; line-height: 1.5; display: block; }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header"><h1>TAREA INFORMÁTICA</h1></div>
+            <div class="menu-list">
+                <a onclick="changeSlide('agesic')" class="active">1. AGESIC</a>
+                <a onclick="changeSlide('ley')" >2. Ley 18.331</a>
+                <a onclick="changeSlide('derechos')">3. Derechos ARCO</a>
+                <a onclick="changeSlide('datos')">4. Tipos de Datos</a>
+                <a onclick="changeSlide('seguridad')">5. Seguridad y Riesgos</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-agesic" class="slide active">
+                <h2>¿Qué es la AGESIC?</h2>
+                <div class="info-block">
+                    <div class="item">
+                        <strong>Definición y Función</strong>
+                        <span>Es la Agencia de Gobierno Electrónico y Sociedad de la Información y del Conocimiento. Sirve para liderar la transformación digital del Estado uruguayo, haciendo que los trámites sean más fáciles y seguros para todos.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Relación con la URCDP</strong>
+                        <span>Dentro de AGESIC funciona la Unidad Reguladora y de Control de Datos Personales. Sirve para vigilar que todas las empresas cumplan la ley y para proteger a los ciudadanos de abusos informáticos.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-ley" class="slide">
+                <h2>La Ley 18.331</h2>
+                <div class="info-block">
+                    <div class="item">
+                        <strong>¿Para qué sirve?</strong>
+                        <span>Sirve para reconocer que la protección de tus datos personales es un Derecho Humano fundamental. Regula cómo se deben guardar, usar y proteger tus datos en cualquier base de datos de Uruguay.</span>
+                    </div>
+                    <div class="item">
+                        <strong>El Habeas Data</strong>
+                        <span>Es la garantía legal que te permite saber qué información tiene el Estado o las empresas sobre ti, y te da el poder de exigir que se corrija o se elimine si es incorrecta.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Tus Derechos ARCO</h2>
+                <div class="info-block">
+                    <div class="item">
+                        <strong>Acceso y Rectificación</strong>
+                        <span>Sirven para que puedas pedir una copia de tus datos gratis y corregir cualquier error (como una deuda que ya pagaste pero sigue figurando).</span>
+                    </div>
+                    <div class="item">
+                        <strong>Cancelación y Oposición</strong>
+                        <span>Sirven para pedir que borren tus datos si ya no quieres que los tengan, o para oponerte a que los usen para mandarte publicidad molesta.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>¿Qué datos se protegen?</h2>
+                <div class="info-block">
+                    <div class="item">
+                        <strong>Datos Sensibles</strong>
+                        <span>Son los más protegidos porque pueden generar discriminación: salud, religión, orientación sexual o política. Nadie puede tratarlos sin una ley o tu permiso expreso.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Datos Biométricos</strong>
+                        <span>Sirven para identificarte de forma única (como tu rostro o huella). La ley obliga a que tengan una seguridad extra para evitar robos de identidad.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Riesgos y Ciberseguridad</h2>
+                <div class="info-block">
+                    <div class="item">
+                        <strong>Riesgos del Mal Uso</strong>
+                        <span>El hackeo, el robo de identidad y el perfilamiento discriminatorio son los mayores riesgos. La ley sirve para obligar a las empresas a tener medidas de seguridad fuertes.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Impacto en Redes Sociales</strong>
+                        <span>La ley nos protege en redes para que las plataformas no vendan nuestra vida privada sin control. Sirve para mantener nuestra libertad en el mundo digital.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
         }
 
         .menu-header h1 {
