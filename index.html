@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 18.331 - Manual Jurídico</title>
+    <title>Ley 18.331 - Presentación Profesional</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,7 +11,7 @@
             --oro: #d4af37;
             --crema: #fdfaf5;
             --oscuro: #2c1e16;
-            --texto: #333;
+            --blanco: #ffffff;
         }
 
         body, html {
@@ -30,10 +30,189 @@
         /* --- MENÚ LATERAL --- */
         nav {
             background-color: var(--oscuro);
-            padding: 25px;
-            border-right: 3px solid var(--marrón);
+            color: var(--blanco);
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
+            border-right: 2px solid var(--marrón);
+        }
+
+        .menu-header h1 {
+            font-size: 1rem;
+            color: var(--oro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .menu-list { display: flex; flex-direction: column; gap: 10px; }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(255,255,255,0.05); color: var(--blanco); }
+        nav a.active { background: var(--marrón); color: var(--blanco); font-weight: 600; }
+
+        /* --- ÁREA DE DIAPOSITIVAS --- */
+        main {
+            background-color: #e8e3dc;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            background: var(--crema);
+            border-radius: 20px;
+            padding: 40px 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active { display: flex; animation: aparecer 0.6s forwards; }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 2rem; border-bottom: 3px solid var(--oro); padding-bottom: 10px; margin-bottom: 20px; }
+        p { color: #444; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
+
+        /* --- CODITOS MARRONES ANIMADOS --- */
+        .features { display: flex; flex-direction: column; gap: 12px; }
+        
+        .item {
+            background: var(--marrón);
+            color: var(--blanco);
+            padding: 15px 25px;
+            border-radius: 10px 50px 50px 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 5px solid var(--oro);
+        }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+        .active .item:nth-child(4) { transition-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="menu-header">
+                <h1>Ley 18.331</h1>
+            </div>
+            <div class="menu-list">
+                <a onclick="changeSlide('inicio')" class="active">01. Portada</a>
+                <a onclick="changeSlide('agesic')">02. AGESIC y URCDP</a>
+                <a onclick="changeSlide('datos')">03. Datos Personales</a>
+                <a onclick="changeSlide('derechos')">04. Derechos ARCO</a>
+                <a onclick="changeSlide('obligaciones')">05. Obligaciones</a>
+                <a onclick="changeSlide('seguridad')">06. Seguridad</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-inicio" class="slide active">
+                <h2>Protección de Datos Personales</h2>
+                <p>Análisis de la normativa uruguaya sobre el derecho al Habeas Data y la privacidad digital.</p>
+                <div class="features">
+                    <span class="item">Derecho Fundamental del Ciudadano</span>
+                    <span class="item">Regulación de la Identidad en Red</span>
+                </div>
+            </div>
+
+            <div id="slide-agesic" class="slide">
+                <h2>AGESIC y la URCDP</h2>
+                <p>Instituciones encargadas de que la tecnología sea segura y legal en Uruguay.</p>
+                <div class="features">
+                    <span class="item">AGESIC: Impulsa la digitalización del Estado</span>
+                    <span class="item">URCDP: Unidad que controla y sanciona abusos</span>
+                    <span class="item">Sirve para denunciar mal uso de tus datos</span>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>¿Qué información se protege?</h2>
+                <p>La ley clasifica los datos para darles el nivel de seguridad adecuado.</p>
+                <div class="features">
+                    <span class="item">Datos Identificativos (Cédula, Nombre)</span>
+                    <span class="item">Datos Sensibles (Salud, Religión, Política)</span>
+                    <span class="item">Datos Biométricos (Huella y Rostro)</span>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Tus Derechos ARCO</h2>
+                <p>Herramientas legales para que tú mandes sobre tu información.</p>
+                <div class="features">
+                    <span class="item">Acceso: Saber qué saben de ti</span>
+                    <span class="item">Rectificación: Corregir errores en tu historial</span>
+                    <span class="item">Cancelación: Borrar datos (Derecho al olvido)</span>
+                    <span class="item">Oposición: Negarte a que usen tus datos para publicidad</span>
+                </div>
+            </div>
+
+            <div id="slide-obligaciones" class="slide">
+                <h2>Obligaciones Legales</h2>
+                <p>Lo que las empresas DEBEN cumplir por ley.</p>
+                <div class="features">
+                    <span class="item">Consentimiento libre e informado</span>
+                    <span class="item">Finalidad: No usar datos para otra cosa</span>
+                    <span class="item">Confidencialidad y Secreto Profesional</span>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Seguridad y Riesgos</h2>
+                <p>Prevención de ataques y sanciones ante la negligencia.</p>
+                <div class="features">
+                    <span class="item">Protección contra Hackeos y Phishing</span>
+                    <span class="item">Cifrado obligatorio de bases de datos</span>
+                    <span class="item">Sanciones económicas por filtraciones</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
         }
 
         .menu-header h1 {
