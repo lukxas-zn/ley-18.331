@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarea: Ley 18.331 y AGESIC</title>
+    <title>Presentación Ley 18.331 - Protección de Datos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,29 +11,231 @@
             --oro: #d4af37;
             --crema: #fdfaf5;
             --oscuro: #2c1e16;
+            --blanco: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100vh;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(rgba(44,30,22,0.8), rgba(44,30,22,0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2070');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(44,30,22,0.85), rgba(44,30,22,0.85)), url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
             overflow: hidden;
         }
 
         #app-container {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 280px 1fr;
             height: 100vh;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
-        /* --- MENÚ LATERAL --- */
+        /* --- NAVEGACIÓN LATERAL ESTILO LAW FIRM --- */
         nav {
-            background-color: rgba(44, 30, 22, 0.9);
+            background-color: rgba(44, 30, 22, 0.95);
             padding: 30px 20px;
             border-right: 2px solid var(--oro);
+            display: flex; flex-direction: column;
+        }
+
+        .logo-area { text-align: center; margin-bottom: 40px; }
+        .logo-area img { width: 60px; filter: brightness(0) invert(1); }
+        .logo-area h1 { font-size: 0.8rem; color: var(--oro); text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; }
+
+        .menu-list { display: flex; flex-direction: column; gap: 8px; }
+
+        nav a {
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 10px 15px; border-radius: 5px;
+            font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+        }
+
+        nav a:hover { background: rgba(212, 175, 55, 0.15); color: var(--blanco); }
+        nav a.active { background: var(--marrón); color: var(--blanco); font-weight: 700; border-left: 4px solid var(--oro); }
+
+        /* --- CONTENEDOR DE DIAPOSITIVAS --- */
+        main { padding: 40px; display: flex; align-items: center; justify-content: center; position: relative; }
+
+        .slide {
+            position: absolute; width: 88%; height: 88%;
+            background: rgba(253, 250, 245, 0.98);
+            border-radius: 12px; padding: 40px 50px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            display: none; flex-direction: column; overflow-y: auto;
+        }
+
+        .slide.active { display: flex; animation: slideEnter 0.6s ease-out forwards; }
+
+        @keyframes slideEnter {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        h2 { color: var(--marrón); font-size: 1.8rem; border-bottom: 2px solid var(--oro); padding-bottom: 10px; margin-top: 0; }
+        .sub-text { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 25px; }
+
+        /* --- CODITOS DESLIZANTES --- */
+        .info-grid { display: flex; flex-direction: column; gap: 15px; }
+        
+        .item {
+            background: var(--marrón); color: var(--blanco);
+            padding: 15px 25px; border-radius: 5px 30px 30px 5px;
+            opacity: 0; transform: translateX(-80px);
+            transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 5px solid var(--oro);
+        }
+
+        .item strong { color: var(--oro); display: block; margin-bottom: 4px; font-size: 0.95rem; text-transform: uppercase; }
+        .item span { font-size: 0.85rem; line-height: 1.4; opacity: 0.9; display: block; }
+
+        .active .item { opacity: 1; transform: translateX(0); }
+        .active .item:nth-child(1) { transition-delay: 0.2s; }
+        .active .item:nth-child(2) { transition-delay: 0.4s; }
+        .active .item:nth-child(3) { transition-delay: 0.6s; }
+        .active .item:nth-child(4) { transition-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <nav>
+            <div class="logo-area">
+                <img src="https://cdn-icons-png.flaticon.com/512/3438/3438139.png" alt="Justicia">
+                <h1>Firma Legal<br>Datos Protegidos</h1>
+            </div>
+            <div class="menu-list">
+                <a onclick="changeSlide('intro')" class="active">1. La Ley 18.331</a>
+                <a onclick="changeSlide('datos')">2. Datos Personales</a>
+                <a onclick="changeSlide('derechos')">3. Derechos ARCO</a>
+                <a onclick="changeSlide('organizaciones')">4. Organizaciones</a>
+                <a onclick="changeSlide('seguridad')">5. Seguridad</a>
+                <a onclick="changeSlide('sociedad')">6. Impacto Social</a>
+                <a onclick="changeSlide('reflexion')">7. Reflexión Final</a>
+            </div>
+        </nav>
+
+        <main>
+            <div id="slide-intro" class="slide active">
+                <h2>¿Qué es la Ley 18.331?</h2>
+                <p class="sub-text">Marco normativo en Uruguay para el tratamiento de información.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Objetivo de la Ley</strong>
+                        <span>Garantizar el derecho fundamental a la protección de datos personales y el Habeas Data ante registros públicos o privados.</span>
+                    </div>
+                    <div class="item">
+                        <strong>¿Por qué surge?</strong>
+                        <span>Ante el avance tecnológico masivo, surge para evitar el uso indebido de información que pueda afectar la dignidad o privacidad de los ciudadanos.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-datos" class="slide">
+                <h2>¿Qué son los Datos Personales?</h2>
+                <p class="sub-text">Toda información que nos identifica.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Definición Técnica</strong>
+                        <span>Es cualquier información de cualquier tipo relativa a personas físicas o jurídicas que las haga identificables.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Ejemplos Comunes</strong>
+                        <span>Nombre y apellido, número de Cédula de Identidad, domicilio, teléfono, fotos, huellas digitales y correos electrónicos.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-derechos" class="slide">
+                <h2>Derechos de las Personas</h2>
+                <p class="sub-text">Tus facultades sobre tu propia información.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Acceso y Rectificación</strong>
+                        <span>Derecho a obtener información de tus datos en bases de datos y solicitar correcciones si son erróneos o están incompletos.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Eliminación (Derecho al Olvido)</strong>
+                        <span>Facultad de exigir que se borren tus datos cuando ya no es necesario su tratamiento o si se obtuvieron de forma ilegal.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-organizaciones" class="slide">
+                <h2>Obligaciones de las Organizaciones</h2>
+                <p class="sub-text">Responsabilidades para empresas y el Estado.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Manejo Ético y Legal</strong>
+                        <span>Las entidades deben inscribir sus bases de datos en la URCDP y utilizar la información solo para el fin que fue recolectada.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Importancia del Consentimiento</strong>
+                        <span>Es obligatorio que el dueño de los datos dé su permiso previo, expreso e informado antes de que se procese su información.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-seguridad" class="slide">
+                <h2>Importancia de la Seguridad</h2>
+                <p class="sub-text">Protegiendo la integridad en el mundo digital.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Principales Riesgos</strong>
+                        <span>Hackeos, filtraciones masivas de datos y robo de identidad, que pueden causar daños financieros y morales graves.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Medidas de Protección</strong>
+                        <span>Uso de contraseñas fuertes, cifrado de archivos, antivirus y capacitación del personal sobre privacidad.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-sociedad" class="slide">
+                <h2>Impacto en la Sociedad</h2>
+                <p class="sub-text">Cómo la ley cambia nuestra vida cotidiana.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Protección Ciudadana</strong>
+                        <span>Evita el acoso comercial (spam), previene la discriminación basada en datos sensibles y nos da control sobre nuestra imagen.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Situaciones Cotidianas</strong>
+                        <span>Cuando una red social te pide permisos, o cuando una tienda te pide el número de cédula para una factura; ahí actúa la ley.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="slide-reflexion" class="slide">
+                <h2>Reflexión Final del Grupo</h2>
+                <p class="sub-text">Conclusiones sobre el futuro de la privacidad.</p>
+                <div class="info-grid">
+                    <div class="item">
+                        <strong>Importancia Actual</strong>
+                        <span>En un mundo donde "los datos son el nuevo petróleo", esta ley es el escudo que protege nuestra libertad individual.</span>
+                    </div>
+                    <div class="item">
+                        <strong>Redes Sociales y Tecnología</strong>
+                        <span>El uso masivo de Redes Sociales e IA hace que debamos ser más conscientes que nunca de qué compartimos y con quién.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function changeSlide(slideId) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + slideId);
+            if (target) target.classList.add('active');
+
+            const link = Array.from(document.querySelectorAll('nav a')).find(a => a.getAttribute('onclick').includes(slideId));
+            if (link) link.classList.add('active');
+        }
+    </script>
+</body>
+</html>
             display: flex;
             flex-direction: column;
         }
